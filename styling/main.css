@@ -2,23 +2,31 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
   font-weight: 500;
   font-family: "Lato", sans-serif;
 }
+
+/* ------------------NAVIGATION BAR--------------------- */
+
 .navbarContainer {
   background: #34495e;
 }
+.refreshLogo {
+  font-size: 1.2em;
+  font-weight: 900;
+}
 
 .navbarContainer ul {
-  position: fixed;
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }
-
+.navbarContainer ul li {
+  width: 20%;
+}
 .navbarContainer ul li > ul {
   display: none;
   flex-direction: column;
@@ -33,6 +41,7 @@
   color: #e1e4e7;
   font-weight: normal;
 }
+/* make this a class to toggle */
 .navbarContainer ul li:hover > ul {
   display: flex;
   margin: 0.5em;
@@ -41,6 +50,7 @@
   display: block;
   background: #34495e;
   color: white;
+  font-weight: 600;
   padding: 0.8em;
   text-align: center;
   text-decoration: none;
@@ -61,7 +71,17 @@
 .navbarContainer ul li > ul a {
   border-radius: 0.5em;
   width: fit-content;
-  /* margin: 0.5em; */
   padding: 0.5em;
   font-size: 0.9em;
+}
+button {
+  display: block;
+  padding: 0.6em;
+  background-color: #1abc9c;
+  border: none;
+  border-radius: 0.5em;
+  font-size: 1em;
+  font-weight: 400;
+  color: white;
+  margin: 0 auto;
 }
