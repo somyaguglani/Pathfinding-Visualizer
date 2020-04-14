@@ -135,7 +135,7 @@ button:hover {
 
 /* ---------DIFFERENT NODES----------- */
 .start {
-  background-image: url(./imagesAndSvg/triangletwo-right.svg);
+  /* background-image: url(`../styling/imagesAndSvg/triangletwo-right.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -146,7 +146,11 @@ button:hover {
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-play-state: running;
-  animation-direction: alternate;
+  animation-direction: alternate; */
+  background-color: red;
+}
+.target {
+  background-color: green;
 }
 @keyframes specialNodes {
   0% {
@@ -158,4 +162,24 @@ button:hover {
   100% {
     transform: scale(1);
   }
+}
+
+/* ------------------GRID-------------------- */
+
+td {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: white;
+}
+table {
+  table-layout: fixed;
+  width: 1500px;
+  height: 520px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.gridFlex {
+  display: flex;
+  cursor: auto;
+  justify-content: center;
+  margin: 2em 1em 1em 1em;
 }
