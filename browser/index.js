@@ -53,11 +53,10 @@ Board.prototype.createGrid = function () {
       }
       const newNode = new Node(id, nodeStatus);
       allNodesRowArray.push(newNode);
-      gridRow += `<td id = "${id}"class = "${nodeStatus}"></td>`;
+      gridRow += `<td id="${id}" class="${nodeStatus}"></td>`;
     }
     htmlOfGrid += `${gridRow}</tr>`;
     this.allNodesArray.push(allNodesRowArray);
-    htmlOfGrid += gridRow;
   }
   gridContainer.innerHTML = htmlOfGrid;
 
@@ -69,9 +68,8 @@ Board.prototype.createGrid = function () {
 let contentHeight = mainContentContainer.offsetHeight;
 let docHeight = document.documentElement.scrollHeight;
 let docWidth = document.documentElement.scrollWidth;
-let height = Math.floor((docHeight - contentHeight - navHeight) / 53);
+let height = Math.floor((docHeight - contentHeight - navHeight) / 26);
 let width = Math.floor(docWidth / 25);
 let board = new Board(width, height);
 console.log(width, height);
-// console.log(board);
 board.initialize();

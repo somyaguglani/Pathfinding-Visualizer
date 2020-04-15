@@ -57,6 +57,7 @@
   padding: 0.7em;
   text-align: center;
   text-decoration: none;
+  font-size: 0.9em;
 }
 .navbarContainer ul li > a:hover {
   color: #1abc9c;
@@ -92,7 +93,7 @@ button {
   padding: 0.6em;
   background-color: #1abc9c;
   border: none;
-  border-radius: 0.5em;
+  border-radius: 0.4em;
   font-size: 1em;
   font-weight: 400;
   color: white;
@@ -116,7 +117,7 @@ button:hover {
 .gridContainer {
   color: #34495e;
   font-weight: normal;
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 .gridContainer ul {
   display: flex;
@@ -131,24 +132,30 @@ button:hover {
   font-weight: normal;
 }
 .gridContainer ul li {
-  margin: 1em;
+  margin: 0.6em;
+}
+.mainContentContainer div[id="nodeSymbol"] {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  position: relative;
+  top: 0.35em;
+  margin: 0 0.42em;
 }
 
 /* ---------DIFFERENT NODES----------- */
 .start {
-  /* background-image: url(`../styling/imagesAndSvg/triangletwo-right.svg);
+  background-image: url("../styling/imagesAndSvg/triangletwo-right.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   animation-name: specialNodes;
   animation-duration: 2s;
-  animation-delay: 0s;
   animation-timing-function: ease-out;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-play-state: running;
-  animation-direction: alternate; */
-  background-color: red;
+  animation-direction: alternate;
 }
 .target {
   background-color: green;
@@ -174,7 +181,7 @@ td {
 table {
   table-layout: fixed;
   width: 1500px;
-  height: 520px;
+  height: 480px;
   border-spacing: 0;
   border-collapse: collapse;
 }
@@ -182,5 +189,5 @@ table {
   display: flex;
   cursor: auto;
   justify-content: center;
-  margin: 1em 1em 1em 1em;
+  margin: 1em 0.7em 0.5em 0.7em;
 }
