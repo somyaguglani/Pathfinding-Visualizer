@@ -124,6 +124,7 @@ button:hover {
   list-style-type: disc;
   list-style: none;
   flex-wrap: wrap;
+  margin-top: 1em;
 }
 .gridContainer ul li,
 .gridContainer div {
@@ -181,5 +182,5 @@ table {
   display: flex;
   cursor: auto;
   justify-content: center;
-  margin: 2em 1em 1em 1em;
+  margin: 1em 1em 1em 1em;
 }
