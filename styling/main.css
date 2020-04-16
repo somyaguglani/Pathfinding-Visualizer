@@ -180,6 +180,20 @@ table {
   border-radius: 0.2em;
   text-align: center;
 }
+@media (max-width: 800px) {
+  .modalInner {
+    font-size: 0.6em;
+  }
+  .modalInner h1,
+  .modalInner h2,
+  .modalInner p {
+    margin: auto;
+    padding: 0.2em;
+  }
+  .modalInner button {
+    margin: 0.2em;
+  }
+}
 .modalInner {
   display: grid;
   color: #34495e;
@@ -226,10 +240,9 @@ table {
   justify-content: space-between;
   align-items: flex-end;
 }
-.tutorialButtons img {
-  width: 8em;
-  height: 8em;
-  margin-left: 2em;
+.modalInner img {
+  max-width: 8em;
+  max-height: 8em;
 }
 
 /* ---------DIFFERENT NODES----------- */

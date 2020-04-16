@@ -21,7 +21,7 @@ function Board(width, height) {
 Board.prototype.initialize = function () {
   this.createGrid();
   // this.addEventListenters();
-  // this.tutorialWork();
+  this.tutorialWork();
 };
 
 Board.prototype.createGrid = function () {
@@ -62,6 +62,128 @@ Board.prototype.createGrid = function () {
 
   console.log(this.allNodesArray);
 };
+
+let counter = 0;
+const content = [];
+content.push(
+  `<h1>Welcome to Pathfinding Visualizer!</h1>
+        <h2>
+          This short tutorial will walk you through all of the features of this
+          application.
+        </h2>
+        <p>
+          If you want to dive right in, feel free to press the "Skip Tutorial"
+          button below. Otherwise, press "Next"!
+        </p>
+        <div class="pageCounter">${counter + 1}/9</div>
+        <p>If you want to see the source code for this application, check out my <a  href="https://github.com/somyaguglani/Pathfinding-Visualizer" >github </a></p>
+        <div class="tutorialButtons">
+          <button class="skipButton">Skip Tutorial</button>
+          <button class="prevButton">Previous</button>
+          <button class="nextButton">Next</button>
+        </div>`
+);
+content.push(`<h1>What is a pathfinding algorithm?</h1>
+        <h2>
+        At its core, a pathfinding algorithm seeks to find the shortest path between two points. This application visualizes various pathfinding algorithms in action, and more!
+        </h2>
+        <p>
+        All of the algorithms on this application are adapted for a 2D grid, where 90 degree turns have a "cost" of 1 and movements from a node to another have a "cost" of 1.
+        </p>
+        <div class="pageCounter">${counter + 1}/9</div>
+        <img src="./styling/imagesAndSvg/path.png" alt="path">
+        <div class="tutorialButtons">
+          <button class="skipButton">Skip Tutorial</button>
+          <button class="prevButton">Previous</button>
+          <button class="nextButton">Next</button>
+        </div>`);
+content.push(`<h1>Picking an algorithm</h1>
+        <h2>
+        Choose an algorithm from the "Algorithms" drop-down menu.
+        </h2>
+        <p>
+       Note that some algorithms are <strong>unweighted</strong>, while others are <strong>weighted</strong>. Unweighted algorithms do not take turns or weight nodes into account, whereas weighted ones do. Additionally, not all algorithms guarantee the shortest path.
+        </p>
+        <div class="pageCounter">${counter + 1}/9</div>
+        <img src="./styling/imagesAndSvg/algorithms.png" alt="algoDemo">
+        <div class="tutorialButtons">
+          <button class="skipButton">Skip Tutorial</button>
+          <button class="prevButton">Previous</button>
+          <button class="nextButton">Next</button>
+        </div>`);
+content.push(`<h1>Meet the algorithms</h1>
+        <h2>
+       Not all algorithms are created equal.
+        </h2>
+        <p>
+     <strong> Dijkstra's Algorithm</strong> (weighted): the father of pathfinding algorithms; guarantees the shortest path
+ <strong>A* Search  </strong>(weighted): arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm
+ <strong>Greedy Best-first Search  </strong>(weighted): a faster, more heuristic-heavy version of A*; does not guarantee the shortest path
+ <strong>Swarm Algorithm  </strong>(weighted): a mixture of Dijkstra's Algorithm and A*; does not guarantee the shortest-path
+ <strong>Convergent Swarm Algorithm (weighted) </strong>: the faster, more heuristic-heavy version of Swarm; does not guarantee the shortest path
+ <strong>Bidirectional Swarm Algorithm </strong> (weighted): Swarm from both sides; does not guarantee the shortest path
+ <strong>Breath-first Search </strong> (unweighted): a great algorithm; guarantees the shortest path
+ <strong>Depth-first Search </strong> (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path
+        </p>
+        <div class="pageCounter">${counter + 1}/9</div>
+        <div class="tutorialButtons">
+          <button class="skipButton">Skip Tutorial</button>
+          <button class="prevButton">Previous</button>
+          <button class="nextButton">Next</button>
+        </div>`);
+content.push(`<h1>Adding walls and weights</h1>
+        <h2>
+       Click on the grid to add a wall. Click on the grid while pressing W to add a weight. Generate mazes and patterns from the "Mazes & Patterns" drop-down menu.
+        </h2>
+        <p>
+       Walls are impenetrable, meaning that a path cannot cross through them. Weights, however, are not impassable. They are simply more "costly" to move through. In this application, moving through a weight node has a "cost" of 15.
+        </p>
+        <div class="pageCounter">${counter + 1}/9</div>
+        <img src="./styling/imagesAndSvg/walls.gif" alt="wallsDemo">
+        <div class="tutorialButtons">
+          <button class="skipButton">Skip Tutorial</button>
+          <button class="prevButton">Previous</button>
+          <button class="nextButton">Next</button>
+        </div>`);
+content.push(`<h1>Dragging nodes</h1>
+        <h2>
+    Click and drag the start, bomb, and target nodes to move them.
+        </h2>
+        <p>
+      Note that you can drag nodes even after an algorithm has finished running. This will allow you to instantly see different paths.
+        </p>
+        <div class="pageCounter">${counter + 1}/9</div>
+        <img src="./styling/imagesAndSvg/dragging.gif" alt="draggingDemo">
+        <div class="tutorialButtons">
+          <button class="skipButton">Skip Tutorial</button>
+          <button class="prevButton">Previous</button>
+          <button class="nextButton">Next</button>
+        </div>`);
+content.push(`<h1>Visualizing and more</h1>
+        <h2>
+       Use the navbar buttons to visualize algorithms and to do other stuff!
+        </h2>
+        <p>
+      You can clear the current path, clear walls and weights, clear the entire board, and adjust the visualization speed, all from the navbar. If you want to access this tutorial again, click on "Pathfinding Visualizer" in the top left corner of your screen.
+        </p>
+        <div class="pageCounter">${counter + 1}/9</div>
+        <img src="./styling/imagesAndSvg/navbar.png" alt="algoDemo">
+        <div class="tutorialButtons">
+          <button class="skipButton">Skip Tutorial</button>
+          <button class="prevButton">Previous</button>
+          <button class="nextButton">Next</button>
+        </div>`);
+content.push(`<h1>Enjoy!</h1>
+        <h2>
+       Now that you know everything, it's time to play around with this project. I hope you have fun!
+        </h2>
+       
+        <div class="pageCounter">${counter + 1}/9</div>
+          <button class="skipButton">Skip Tutorial</button>
+          <button class="prevButton">Previous</button>
+          <button class="finishButton">Finish</button>
+        </div>`);
+Board.prototype.tutorialWork = function () {};
 
 //----------------MAKING BOARD OBJECT-------------
 
