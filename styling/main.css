@@ -5,7 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 button {
@@ -71,6 +71,7 @@ button {
   text-align: center;
   text-decoration: none;
   font-size: 0.9em;
+  font-weight: 700;
 }
 .navbarContainer ul li > a:hover {
   color: #1abc9c;
@@ -175,12 +176,13 @@ table {
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 1);
   width: 50%;
-  height: 70%;
+  height: 80%;
   border: 0.15em solid #34495e;
+  grid-auto-rows: min-content;
   border-radius: 0.2em;
   text-align: center;
 }
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .modalInner {
     font-size: 0.6em;
   }
@@ -188,10 +190,16 @@ table {
   .modalInner h2,
   .modalInner p {
     margin: auto;
-    padding: 0.2em;
+    padding: 0em;
+    font-weight: normal;
   }
   .modalInner button {
     margin: 0.2em;
+  }
+  .modalInner img {
+    max-width: 4em;
+    max-height: 4em;
+    margin: auto;
   }
 }
 .modalInner {
@@ -210,7 +218,7 @@ table {
 .modalInner h2,
 .modalInner p {
   margin: auto;
-  padding: 0.8em;
+  padding: 0.2em;
 }
 .modalInner .pageCounter {
   position: absolute;
@@ -234,15 +242,18 @@ table {
   justify-content: space-between;
   align-items: flex-end;
 }
-.tutorialButtons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-end;
+.tutorialButtons button {
+  width: fit-content;
+  height: fit-content;
 }
+
 .modalInner img {
-  max-width: 8em;
-  max-height: 8em;
+  max-width: 15em;
+  max-height: 15em;
+  margin: auto;
+}
+strong {
+  font-weight: 800;
 }
 
 /* ---------DIFFERENT NODES----------- */

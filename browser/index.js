@@ -5,6 +5,10 @@ const gridContainer = document.querySelector(`.grid`);
 const navbarContainer = document.querySelector(`.navbarContainer`);
 let navHeight = navbarContainer.offsetHeight;
 const mainContentContainer = document.querySelector(`.mainContentContainer`);
+const modal = document.querySelector(`.tuturialContainerModal`);
+const modalInner = document.querySelector(`.modalInner`);
+const tutorialButtonsFlex = document.querySelectorAll(`.tutorialButtons`);
+const tutorialButtons = tutorialButtonsFlex[0].querySelectorAll(`button`);
 //---------------FUNCTIONS---------------
 function Board(width, height) {
   this.width = width;
@@ -59,13 +63,11 @@ Board.prototype.createGrid = function () {
     this.allNodesArray.push(allNodesRowArray);
   }
   gridContainer.innerHTML = htmlOfGrid;
-
-  console.log(this.allNodesArray);
 };
 
 let counter = 0;
-const content = [];
-content.push(
+const contentArray = [];
+contentArray.push(
   `<h1>Welcome to Pathfinding Visualizer!</h1>
         <h2>
           This short tutorial will walk you through all of the features of this
@@ -77,13 +79,13 @@ content.push(
         </p>
         <div class="pageCounter">${counter + 1}/9</div>
         <p>If you want to see the source code for this application, check out my <a  href="https://github.com/somyaguglani/Pathfinding-Visualizer" >github </a></p>
-        <div class="tutorialButtons">
+        <div class ="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
           <button class="nextButton">Next</button>
         </div>`
 );
-content.push(`<h1>What is a pathfinding algorithm?</h1>
+contentArray.push(`<h1>What is a pathfinding algorithm?</h1>
         <h2>
         At its core, a pathfinding algorithm seeks to find the shortest path between two points. This application visualizes various pathfinding algorithms in action, and more!
         </h2>
@@ -97,7 +99,7 @@ content.push(`<h1>What is a pathfinding algorithm?</h1>
           <button class="prevButton">Previous</button>
           <button class="nextButton">Next</button>
         </div>`);
-content.push(`<h1>Picking an algorithm</h1>
+contentArray.push(`<h1>Picking an algorithm</h1>
         <h2>
         Choose an algorithm from the "Algorithms" drop-down menu.
         </h2>
@@ -111,18 +113,25 @@ content.push(`<h1>Picking an algorithm</h1>
           <button class="prevButton">Previous</button>
           <button class="nextButton">Next</button>
         </div>`);
-content.push(`<h1>Meet the algorithms</h1>
+contentArray.push(`<h1>Meet the algorithms</h1>
         <h2>
        Not all algorithms are created equal.
         </h2>
         <p>
      <strong> Dijkstra's Algorithm</strong> (weighted): the father of pathfinding algorithms; guarantees the shortest path
+     </br>
  <strong>A* Search  </strong>(weighted): arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm
+ </br>
  <strong>Greedy Best-first Search  </strong>(weighted): a faster, more heuristic-heavy version of A*; does not guarantee the shortest path
+ </br>
  <strong>Swarm Algorithm  </strong>(weighted): a mixture of Dijkstra's Algorithm and A*; does not guarantee the shortest-path
+ </br>
  <strong>Convergent Swarm Algorithm (weighted) </strong>: the faster, more heuristic-heavy version of Swarm; does not guarantee the shortest path
+ </br>
  <strong>Bidirectional Swarm Algorithm </strong> (weighted): Swarm from both sides; does not guarantee the shortest path
+ </br>
  <strong>Breath-first Search </strong> (unweighted): a great algorithm; guarantees the shortest path
+ </br>
  <strong>Depth-first Search </strong> (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path
         </p>
         <div class="pageCounter">${counter + 1}/9</div>
@@ -131,10 +140,10 @@ content.push(`<h1>Meet the algorithms</h1>
           <button class="prevButton">Previous</button>
           <button class="nextButton">Next</button>
         </div>`);
-content.push(`<h1>Adding walls and weights</h1>
-        <h2>
+contentArray.push(`<h1>Adding walls and weights</h1>
+        <h3>
        Click on the grid to add a wall. Click on the grid while pressing W to add a weight. Generate mazes and patterns from the "Mazes & Patterns" drop-down menu.
-        </h2>
+        </h3>
         <p>
        Walls are impenetrable, meaning that a path cannot cross through them. Weights, however, are not impassable. They are simply more "costly" to move through. In this application, moving through a weight node has a "cost" of 15.
         </p>
@@ -145,7 +154,7 @@ content.push(`<h1>Adding walls and weights</h1>
           <button class="prevButton">Previous</button>
           <button class="nextButton">Next</button>
         </div>`);
-content.push(`<h1>Dragging nodes</h1>
+contentArray.push(`<h1>Dragging nodes</h1>
         <h2>
     Click and drag the start, bomb, and target nodes to move them.
         </h2>
@@ -159,7 +168,7 @@ content.push(`<h1>Dragging nodes</h1>
           <button class="prevButton">Previous</button>
           <button class="nextButton">Next</button>
         </div>`);
-content.push(`<h1>Visualizing and more</h1>
+contentArray.push(`<h1>Visualizing and more</h1>
         <h2>
        Use the navbar buttons to visualize algorithms and to do other stuff!
         </h2>
@@ -168,22 +177,46 @@ content.push(`<h1>Visualizing and more</h1>
         </p>
         <div class="pageCounter">${counter + 1}/9</div>
         <img src="./styling/imagesAndSvg/navbar.png" alt="algoDemo">
+        <p>Now it's time to play around with the visualizer . Enjoy!</p>
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
-          <button class="nextButton">Next</button>
+          <button class="nextButton">Finish</button>
         </div>`);
-content.push(`<h1>Enjoy!</h1>
-        <h2>
-       Now that you know everything, it's time to play around with this project. I hope you have fun!
-        </h2>
-       
-        <div class="pageCounter">${counter + 1}/9</div>
-          <button class="skipButton">Skip Tutorial</button>
-          <button class="prevButton">Previous</button>
-          <button class="finishButton">Finish</button>
-        </div>`);
-Board.prototype.tutorialWork = function () {};
+
+Board.prototype.tutorialWork = function () {
+  const board = this;
+  const modal = document.querySelector(`.tuturialContainerModal`);
+  const modalInner = document.querySelector(`.modalInner`);
+  const tutorialButtonsFlex = document.querySelectorAll(`.tutorialButtons`);
+  const tutorialButtons = tutorialButtonsFlex[0].querySelectorAll(`button`);
+  tutorialButtons.forEach((button) => {
+    button.addEventListener(`click`, function (e) {
+      if (e.currentTarget.classList.value === `skipButton`) {
+        console.log(`skipButton`);
+        modal.style.display = `none`;
+      } else if (e.currentTarget.classList.value === `prevButton`) {
+        console.log(`prevButton`);
+        if (counter > 0) {
+          counter--;
+          modalInner.innerHTML = contentArray[counter];
+          board.tutorialWork();
+        }
+      } else if (e.currentTarget.classList.value === `nextButton`) {
+        console.log(`nextButton`);
+        if (counter === contentArray.length - 1) {
+          modal.style.display = `none`;
+          return;
+        }
+        if (counter < contentArray.length) {
+          counter++;
+          modalInner.innerHTML = contentArray[counter];
+          board.tutorialWork();
+        }
+      }
+    });
+  });
+};
 
 //----------------MAKING BOARD OBJECT-------------
 
@@ -193,5 +226,4 @@ let docWidth = document.documentElement.scrollWidth;
 let height = Math.floor((docHeight - contentHeight - navHeight) / 25);
 let width = Math.floor(docWidth / 24);
 let board = new Board(width, height);
-console.log(width, height);
 board.initialize();
