@@ -79,6 +79,8 @@ contentArray.push(
         </p>
         <div class="pageCounter">${counter + 1}/9</div>
         <p>If you want to see the source code for this application, check out my <a  href="https://github.com/somyaguglani/Pathfinding-Visualizer" >github </a></p>
+        <img src="./styling/imagesAndSvg/c_icon.png" alt="startingIcon">
+
         <div class ="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
@@ -177,7 +179,7 @@ contentArray.push(`<h1>Visualizing and more</h1>
         </p>
         <div class="pageCounter">${counter + 1}/9</div>
         <img src="./styling/imagesAndSvg/navbar.png" alt="algoDemo">
-        <p>Now it's time to play around with the visualizer . Enjoy!</p>
+        <h3>Now it's time to play around with the visualizer. Enjoy!</h3>
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
