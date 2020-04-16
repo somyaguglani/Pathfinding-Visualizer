@@ -68,8 +68,8 @@ Board.prototype.createGrid = function () {
 let contentHeight = mainContentContainer.offsetHeight;
 let docHeight = document.documentElement.scrollHeight;
 let docWidth = document.documentElement.scrollWidth;
-let height = Math.floor((docHeight - contentHeight - navHeight) / 26);
-let width = Math.floor(docWidth / 25);
+let height = Math.floor((docHeight - contentHeight - navHeight) / 25);
+let width = Math.floor(docWidth / 24);
 let board = new Board(width, height);
 console.log(width, height);
 board.initialize();

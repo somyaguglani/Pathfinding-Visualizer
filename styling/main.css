@@ -1,12 +1,25 @@
+/* ------------------------UNIVERSAL PROPERTIES-------------------- */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
-  font-size: 1em;
   font-weight: 700;
 }
 
+button {
+  display: block;
+  padding: 0.6em;
+  background-color: #1abc9c;
+  border: none;
+  border-radius: 0.3em;
+  font-size: 1em;
+  font-weight: 400;
+  color: white;
+  outline: none;
+  margin: 0 auto;
+}
 /* ------------------NAVIGATION BAR--------------------- */
 
 .navbarContainer {
@@ -88,17 +101,6 @@
   padding: 0.5em;
   font-size: 0.9em;
 }
-button {
-  display: block;
-  padding: 0.6em;
-  background-color: #1abc9c;
-  border: none;
-  border-radius: 0.4em;
-  font-size: 1em;
-  font-weight: 400;
-  color: white;
-  margin: 0 auto;
-}
 button:hover {
   background-color: #20cfac;
 }
@@ -143,6 +145,93 @@ button:hover {
   margin: 0 0.42em;
 }
 
+/* ------------------GRID-------------------- */
+
+td {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: white;
+}
+table {
+  table-layout: fixed;
+  width: 1500px;
+  height: 480px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.gridFlex {
+  display: flex;
+  cursor: auto;
+  justify-content: center;
+  margin: 1em 0.7em 0.5em 0.7em;
+}
+
+/* ---------------------MODAL------------------------ */
+
+.tuturialContainerModal {
+  display: block;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 1);
+  width: 50%;
+  height: 70%;
+  border: 0.15em solid #34495e;
+  border-radius: 0.2em;
+  text-align: center;
+}
+.modalInner {
+  display: grid;
+  color: #34495e;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  overflow: auto;
+}
+.modalInner h1,
+.modalInner h2,
+.modalInner p {
+  margin: auto;
+  padding: 0.8em;
+}
+.modalInner .pageCounter {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+.modalInner button {
+  display: block;
+  margin: 1em;
+  width: fit-content;
+}
+.modalInner a {
+  text-decoration: none;
+  color: #1abc9c;
+  font-size: 1.2em;
+  margin-left: 0.2em;
+}
+.tutorialButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.tutorialButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.tutorialButtons img {
+  width: 8em;
+  height: 8em;
+  margin-left: 2em;
+}
+
 /* ---------DIFFERENT NODES----------- */
 .start {
   background-image: url("../styling/imagesAndSvg/triangletwo-right.svg");
@@ -170,24 +259,4 @@ button:hover {
   100% {
     transform: scale(1);
   }
-}
-
-/* ------------------GRID-------------------- */
-
-td {
-  border: 1px solid rgb(175, 216, 248);
-  background-color: white;
-}
-table {
-  table-layout: fixed;
-  width: 1500px;
-  height: 480px;
-  border-spacing: 0;
-  border-collapse: collapse;
-}
-.gridFlex {
-  display: flex;
-  cursor: auto;
-  justify-content: center;
-  margin: 1em 0.7em 0.5em 0.7em;
 }
