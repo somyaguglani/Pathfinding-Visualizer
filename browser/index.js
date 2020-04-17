@@ -79,7 +79,7 @@ contentArray.push(
         </p>
         <div class="pageCounter">${counter + 1}/9</div>
         <p>If you want to see the source code for this application, check out my <a  href="https://github.com/somyaguglani/Pathfinding-Visualizer" >github </a></p>
-        <img src="./styling/imagesAndSvg/c_icon.png" alt="startingIcon">
+        <img style=" height:150px;" src="./styling/imagesAndSvg/c_icon.png" alt="startingIcon">
 
         <div class ="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
