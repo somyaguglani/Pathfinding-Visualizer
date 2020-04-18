@@ -14,7 +14,7 @@ button {
   background-color: #1abc9c;
   border: none;
   border-radius: 0.3em;
-  font-size: 1em;
+  font-size: 1.1em;
   font-weight: 400;
   color: white;
   outline: none;
@@ -116,13 +116,13 @@ button:hover {
 
 .algoDescription {
   text-align: center;
-  margin: 1em 0.5em 0.5em 0.5em;
+  margin: 1.2em 0.5em 0.5em 0.5em;
 }
 
 .gridContainer {
   color: #34495e;
   font-weight: normal;
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 .gridContainer ul {
   display: flex;
@@ -156,8 +156,8 @@ td {
 }
 table {
   table-layout: fixed;
-  width: 1500px;
-  height: 480px;
+  width: 1520px;
+  height: 530px;
   border-spacing: 0;
   border-collapse: collapse;
 }
@@ -177,12 +177,17 @@ table {
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 1);
-  width: 50%;
+  width: 80%;
   height: 80%;
   border: 0.15em solid #34495e;
   grid-auto-rows: min-content;
   border-radius: 0.2em;
   text-align: center;
+}
+@media screen and (min-width: 800px) {
+  .tuturialContainerModal {
+    width: 50%;
+  }
 }
 @media (max-width: 600px) {
   .modalInner {
@@ -260,6 +265,9 @@ table {
 }
 strong {
   font-weight: 800;
+}
+.responsive-img {
+  max-width: 100% !important;
 }
 
 /* ---------DIFFERENT NODES----------- */
