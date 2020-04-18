@@ -47,6 +47,7 @@ button {
   display: none;
   flex-direction: column;
   background-color: #34495e;
+  z-index: 4;
 }
 
 .navbarContainer ul li > ul li {

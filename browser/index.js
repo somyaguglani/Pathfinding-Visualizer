@@ -195,17 +195,14 @@ Board.prototype.tutorialWork = function () {
   tutorialButtons.forEach((button) => {
     button.addEventListener(`click`, function (e) {
       if (e.currentTarget.classList.value === `skipButton`) {
-        console.log(`skipButton`);
         modal.style.display = `none`;
       } else if (e.currentTarget.classList.value === `prevButton`) {
-        console.log(`prevButton`);
         if (counter > 0) {
           counter--;
           modalInner.innerHTML = contentArray[counter];
           board.tutorialWork();
         }
       } else if (e.currentTarget.classList.value === `nextButton`) {
-        console.log(`nextButton`);
         if (counter === contentArray.length - 1) {
           modal.style.display = `none`;
           return;
