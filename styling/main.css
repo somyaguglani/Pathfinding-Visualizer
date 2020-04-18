@@ -72,7 +72,7 @@ button {
   padding: 0.7em;
   text-align: center;
   text-decoration: none;
-  font-size: 0.9em;
+  font-size: 1em;
   font-weight: 700;
 }
 .navbarContainer ul li > a:hover {
@@ -157,7 +157,7 @@ td {
 table {
   table-layout: fixed;
   width: 1520px;
-  height: 530px;
+  height: 520px;
   border-spacing: 0;
   border-collapse: collapse;
 }

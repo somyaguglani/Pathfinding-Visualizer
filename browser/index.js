@@ -266,7 +266,7 @@ Board.prototype.toggleButtons = function () {
 let contentHeight = mainContentContainer.offsetHeight;
 let docHeight = document.documentElement.scrollHeight;
 let docWidth = document.documentElement.scrollWidth;
-let height = Math.floor((docHeight - contentHeight - navHeight) / 27);
+let height = Math.floor((docHeight - contentHeight - navHeight) / 28);
 let width = Math.floor(docWidth / 26);
 let board = new Board(width, height);
 board.initialize();
