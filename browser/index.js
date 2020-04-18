@@ -5,10 +5,7 @@ const gridContainer = document.querySelector(`.grid`);
 const navbarContainer = document.querySelector(`.navbarContainer`);
 let navHeight = navbarContainer.offsetHeight;
 const mainContentContainer = document.querySelector(`.mainContentContainer`);
-const modal = document.querySelector(`.tuturialContainerModal`);
-const modalInner = document.querySelector(`.modalInner`);
-const tutorialButtonsFlex = document.querySelectorAll(`.tutorialButtons`);
-const tutorialButtons = tutorialButtonsFlex[0].querySelectorAll(`button`);
+
 //---------------FUNCTIONS---------------
 function Board(width, height) {
   this.width = width;
@@ -226,3 +223,4 @@ let height = Math.floor((docHeight - contentHeight - navHeight) / 25);
 let width = Math.floor(docWidth / 24);
 let board = new Board(width, height);
 board.initialize();
+//errors-> pic, counter, concepts->event listeners
