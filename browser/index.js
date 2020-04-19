@@ -14,6 +14,7 @@ function Board(width, height) {
   this.speed = `fast`;
   this.algo = ``;
   this.start = ``;
+  this.keyDown = false;
   this.target = ``;
   this.allNodesArray = [];
   this.tutorialContentArray = [];
@@ -85,15 +86,28 @@ Board.prototype.addEventListeners = function () {
 
 Board.prototype.changeNodeStatus = function (currentNode, currentNodeElement) {
   const unweightedalgos = [`dfs`, `bfs`];
-  console.log(currentNode, currentNodeElement);
+
   const specialStatus = [`start`, `target`];
-  if (!specialStatus.includes(currentNode.status)) {
-    currentNodeElement.classList.toggle(
-      currentNode.status === `unvisited` ? `wall` : `unvisited`
-    );
-    currentNode.status = currentNodeElement.classList[0];
+  if (!this.keyDown) {
+    if (!specialStatus.includes(currentNode.status)) {
+      currentNodeElement.className =
+        currentNode.status === `unvisited` ? `wall` : `unvisited`;
+      currentNode.status =
+        currentNodeElement.className === `unvisited` ? `unvisited` : `wall`;
+      console.log(currentNode);
+    }
+  } else if (this.keyDown === 87 && !unweightedalgos.includes(this.algo)) {
+    //weights check if algo is done or not? doubt in this
+    if (!specialStatus.includes(currentNode.status)) {
+      console.log(`weights got added`);
+      currentNodeElement.className =
+        currentNode.weight !== 15 ? `unvisited weight` : `unvisited`;
+      currentNode.weight =
+        currentNodeElement.className === `unvisited weight` ? 15 : 0;
+      currentNode.status = `unvisited`;
+      console.log(currentNode);
+    }
   }
-  //weights
 };
 
 Board.prototype.getNode = function (id) {
@@ -164,7 +178,7 @@ Board.prototype.contentInitialize = function () {
  </br>
  <strong>Swarm Algorithm  </strong>(weighted): a mixture of Dijkstra's Algorithm and A*; does not guarantee the shortest-path
  </br>
- <strong>Convergent Swarm Algorithm (weighted) </strong>: the faster, more heuristic-heavy version of Swarm; does not guarantee the shortest path
+ <strong>Convergent Swarm Algorithm </strong>(weighted) : the faster, more heuristic-heavy version of Swarm; does not guarantee the shortest path
  </br>
  <strong>Bidirectional Swarm Algorithm </strong> (weighted): Swarm from both sides; does not guarantee the shortest path
  </br>
@@ -215,7 +229,7 @@ Board.prototype.contentInitialize = function () {
         </p>
         <div class="pageCounter">7/9</div>
         <img class = "responsive-img" src="./styling/imagesAndSvg/navbar.png" alt="algoDemo">
-        <h3>Now it's time to play around with the visualizer. I hope you have as much fun as i had building it. Enjoy!</h3>
+        <h2>Now it's time to play around with the visualizer. I hope you have as much fun as i had building it. Enjoy!</h2>
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
@@ -270,4 +284,7 @@ let height = Math.floor((docHeight - contentHeight - navHeight) / 28);
 let width = Math.floor(docWidth / 26);
 let board = new Board(width, height);
 board.initialize();
+window.addEventListener(`keydown`, (e) => {
+  board.keyDown = e.keyCode;
+});
 //errors-> pic,  concepts->event listeners
