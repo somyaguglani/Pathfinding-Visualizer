@@ -1,6 +1,6 @@
 const specialNodes = [`start`, `target`];
 
-const secondMaze = (
+const horizontalSkewMaze = (
   board,
   rowsi,
   rowei,
@@ -65,7 +65,7 @@ const secondMaze = (
     }
 
     if (currentRow - 2 - rowsi > colei - colsi) {
-      secondMaze(
+      horizontalSkewMaze(
         board,
         roesi,
         currentRow - 2,
@@ -75,7 +75,7 @@ const secondMaze = (
         outerWalls
       );
     } else {
-      secondMaze(
+      horizontalSkewMaze(
         board,
         roesi,
         currentRow - 2,
@@ -86,7 +86,7 @@ const secondMaze = (
       );
     }
     if (rowei - (currentRow + 2) > colei - colsi) {
-      secondMaze(
+      horizontalSkewMaze(
         board,
         currentRow + 2,
         rowei,
@@ -96,7 +96,7 @@ const secondMaze = (
         outerWalls
       );
     } else {
-      secondMaze(
+      horizontalSkewMaze(
         board,
         currentRow + 2,
         rowei,
@@ -140,7 +140,7 @@ const secondMaze = (
     }
 
     if (rowei - rowsi > currentCol - 2 - colsi) {
-      secondMaze(
+      horizontalSkewMaze(
         board,
         rowsi,
         rowei,
@@ -150,7 +150,7 @@ const secondMaze = (
         outerWalls
       );
     } else {
-      secondMaze(
+      horizontalSkewMaze(
         board,
         rowsi,
         rowei,
@@ -161,7 +161,7 @@ const secondMaze = (
       );
     }
     if (rowei - rowsi > colei - (currentCol + 2)) {
-      secondMaze(
+      horizontalSkewMaze(
         board,
         rowsi,
         rowei,
@@ -171,7 +171,7 @@ const secondMaze = (
         outerWalls
       );
     } else {
-      secondMaze(
+      horizontalSkewMaze(
         board,
         rowsi,
         rowei,
@@ -183,4 +183,4 @@ const secondMaze = (
     }
   }
 };
-export default secondMaze;
+export default horizontalSkewMaze;
