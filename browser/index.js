@@ -1,5 +1,5 @@
 import Node from "../browser/Node.js";
-
+import mazeGenerator from "../browser/animations/mazeGenerator.js";
 const gridContainer = document.querySelector(`.grid`);
 const navbarContainer = document.querySelector(`.navbarContainer`);
 let navHeight = navbarContainer.offsetHeight;
@@ -9,21 +9,24 @@ const mainContentContainer = document.querySelector(`.mainContentContainer`);
 function Board(width, height) {
   this.width = width;
   this.height = height;
-  this.animationsArray = [];
-  this.algoDone = false;
+  this.wallsAnimationArray = [];
+  this.algoComplete = false;
   this.speed = `fast`;
   this.algo = ``;
   this.start = ``;
-  this.keyDown = false;
   this.target = ``;
   this.allNodesArray = [];
   this.tutorialContentArray = [];
+  this.pressedStatus = `normal`;
+  this.mouseDown = false;
+  this.keyDown = false;
 }
 
 Board.prototype.initialize = function () {
   this.contentInitialize();
   this.createGrid();
   this.addEventListeners();
+
   this.tutorialWork();
 };
 
@@ -65,48 +68,86 @@ Board.prototype.createGrid = function () {
 };
 
 Board.prototype.addEventListeners = function () {
-  const board = this;
-  for (let row = 0; row < board.height; row++) {
-    for (let col = 0; col < board.width; col++) {
-      const currentNodeId = `${row}-${col}`;
-      const currentNodeElement = document.getElementById(`${currentNodeId}`);
-      const currentNode = board.getNode(currentNodeId);
-      currentNodeElement.onmousedown = (e) => {
+  for (let row = 0; row < this.height; row++) {
+    for (let col = 0; col < this.width; col++) {
+      //start work
+      const currNodeId = `${row}-${col}`;
+      const currNodeElement = document.getElementById(`${currNodeId}`);
+      const currNode = this.getNode(currNodeId);
+
+      //work for mousedown
+      currNodeElement.addEventListener(`mousedown`, (e) => {
         e.preventDefault();
-        if (currentNode.status === `start` || currentNode.status === `target`) {
-          console.log(`start or target`);
-        } else {
-          console.log(`other node`);
-          board.changeNodeStatus(currentNode, currentNodeElement);
+        if (1) {
+          //this.buttonsOn
+          this.mouseDown = true;
+          if (currNode.status === `start` || currNode.status === `target`) {
+            this.pressedStatus = currNode.status;
+          } else {
+            this.pressedStatus = `normal`;
+            this.changeNormalNode(currNode, currNodeElement);
+          }
         }
-      };
+      });
+      //work for mouseup
+
+      currNodeElement.addEventListener(`mouseup`, (e) => {
+        if (1) {
+          //this.buttonsOn
+          this.mouseDown = false;
+          if (this.pressedStatus === `start`) this.start = currNodeId;
+          else if (this.pressedStatus === `target`) this.target = currNodeId;
+          // this.pressedStatus= `normal`;  is this imp not yet decided
+        }
+      });
+
+      //work for mouse enter
+      currNodeElement.addEventListener(`mouseenter`, (e) => {
+        if (1) {
+          //this.buttonsOn
+          if (this.mouseDown && this.pressedStatus !== `normal`) {
+            this.changeSpecialNode(currNode, currNodeElement);
+            if (currNode.status === `start`) {
+              this.start = currNodeId;
+              if (this.algoComplete) this.redoAlgo();
+            } else if (currNode.status === `target`) {
+              this.target = currNodeId;
+              if (this.algoComplete) this.redoAlgo();
+            }
+          } else if (this.mouseDown) {
+            this.changeNormalNode(currNode, currNodeElement);
+          }
+        }
+      });
+
+      //work for mouse leave
+      currNodeElement.addEventListener(`mouseleave`, () => {
+        if (1) {
+          //this.buttinsOn
+          if (this.mouseDown && this.pressedStatus !== `normal`) {
+            this.changeSpecialNode(currNode, currNodeElement);
+          }
+        }
+      });
+      //end work
     }
   }
 };
 
-Board.prototype.changeNodeStatus = function (currentNode, currentNodeElement) {
-  const unweightedalgos = [`dfs`, `bfs`];
-
-  const specialStatus = [`start`, `target`];
+Board.prototype.changeSpecialNode = function (currNode, currNodeElement) {}; //do
+Board.prototype.redoAlgo = function () {}; //do
+Board.prototype.changeNormalNode = function (currNode, currNodeElement) {
+  const unweightedAlgos = [`bfs`, `dfs`];
   if (!this.keyDown) {
-    if (!specialStatus.includes(currentNode.status)) {
-      currentNodeElement.className =
-        currentNode.status === `unvisited` ? `wall` : `unvisited`;
-      currentNode.status =
-        currentNodeElement.className === `unvisited` ? `unvisited` : `wall`;
-      console.log(currentNode);
-    }
-  } else if (this.keyDown === 87 && !unweightedalgos.includes(this.algo)) {
-    //weights check if algo is done or not? doubt in this
-    if (!specialStatus.includes(currentNode.status)) {
-      console.log(`weights got added`);
-      currentNodeElement.className =
-        currentNode.weight !== 15 ? `unvisited weight` : `unvisited`;
-      currentNode.weight =
-        currentNodeElement.className === `unvisited weight` ? 15 : 0;
-      currentNode.status = `unvisited`;
-      console.log(currentNode);
-    }
+    currNodeElement.className =
+      currNode.status === `unvisited` ? `wall` : `unvisited`;
+    currNode.status = currNodeElement.className;
+  } else if (this.keyDown === 87 && !unweightedAlgos.includes(this.algo)) {
+    console.log(`weights`);
+    currNodeElement.className =
+      currNode.weight !== 15 ? `unvisited weight` : `unvisited`;
+    currNode.weight = currNodeElement.className === `unvisited weight` ? 15 : 0;
+    currNode.status = `unvisited`;
   }
 };
 
@@ -114,6 +155,7 @@ Board.prototype.getNode = function (id) {
   const [i, j] = id.split(`-`);
   return this.allNodesArray[i][j];
 };
+
 let counter = 0;
 
 Board.prototype.contentInitialize = function () {
@@ -271,8 +313,27 @@ Board.prototype.tutorialWork = function () {
 };
 
 Board.prototype.toggleButtons = function () {
+  //do
   console.log(`all buttons function`);
   //complete this function
+};
+
+Board.prototype.testMaze = function () {
+  for (let row = 0; row < this.height; row++) {
+    for (let col = 0; col < this.width; col++) {
+      if (
+        row === 0 ||
+        col === 0 ||
+        row === this.height - 1 ||
+        col === this.width - 1
+      ) {
+        const val = document.getElementById(`${row}-${col}`);
+        this.wallsAnimationArray.push(val);
+      }
+    }
+  }
+  console.log(this.wallsAnimationArray);
+  // mazeGenerator(this);
 };
 
 //----------------MAKING BOARD OBJECT-------------
@@ -284,7 +345,5 @@ let height = Math.floor((docHeight - contentHeight - navHeight) / 28);
 let width = Math.floor(docWidth / 26);
 let board = new Board(width, height);
 board.initialize();
-window.addEventListener(`keydown`, (e) => {
-  board.keyDown = e.keyCode;
-});
-//errors-> pic,  concepts->event listeners
+board.testMaze();
+window.addEventListener(`keydown`, (e) => (board.keyDown = e.keyCode));
