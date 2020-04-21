@@ -1,3 +1,5 @@
+// ------------FUNCTION FOR GENERATING RECURSIVE VERTICALLY SKEWED MAZE------------------
+
 const specialNodes = [`start`, `target`];
 
 const verticalSkewMaze = (

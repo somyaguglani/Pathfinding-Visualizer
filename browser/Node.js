@@ -1,3 +1,5 @@
+// ---------------CLASS FOR THE NODE OBJECT-----------
+
 function Node(id, status) {
   this.id = id;
   this.status = status;

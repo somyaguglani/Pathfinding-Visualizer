@@ -1,8 +1,10 @@
+// ---------------------FUNCTION FOR GENERATING RANDOM WALL OR WEIGHT MAZE--------------------
+
 let specialNodes = [`start`, `target`];
 
 const randomMaze = (board, type) => {
   for (let row = 0; row < board.height; row++) {
-    for (let col = 0; col < board.height; col++) {
+    for (let col = 0; col < board.width; col++) {
       let random = Math.random();
       const currElement = document.getElementById(`${row}-${col}`);
       const currNode = board.allNodesArray[row][col];

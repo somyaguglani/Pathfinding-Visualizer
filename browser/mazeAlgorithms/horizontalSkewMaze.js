@@ -1,3 +1,5 @@
+// ------------FUNCTION FOR GENERATING RECURSIVE HORIZONTALLY SKEWED MAZE------------------
+
 const specialNodes = [`start`, `target`];
 
 const horizontalSkewMaze = (

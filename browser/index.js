@@ -1,11 +1,15 @@
 import Node from "../browser/Node.js";
 import mazeGenerator from "../browser/animations/mazeGenerator.js";
+import randomMaze from "../browser/mazeAlgorithms/randomMaze.js";
 const gridContainer = document.querySelector(`.grid`);
 const navbarContainer = document.querySelector(`.navbarContainer`);
 let navHeight = navbarContainer.offsetHeight;
 const mainContentContainer = document.querySelector(`.mainContentContainer`);
 
 //---------------FUNCTIONS---------------
+
+// ------------CONSTRUCTOR FOR BOARD OBJECT-----------------
+
 function Board(width, height) {
   this.width = width;
   this.height = height;
@@ -22,6 +26,8 @@ function Board(width, height) {
   this.keyDown = false;
 }
 
+// --------------------FUNCTION FOR INITIALIZING BOARD AREA----------------
+
 Board.prototype.initialize = function () {
   this.contentInitialize();
   this.createGrid();
@@ -30,14 +36,14 @@ Board.prototype.initialize = function () {
   this.tutorialWork();
 };
 
+// -----------FUNCTION FOR CREATING GRID----------------
+
 Board.prototype.createGrid = function () {
   let htmlOfGrid = ``;
   for (let row = 0; row < this.height; row++) {
     let gridRow = `<tr id = "row_${row}">`;
     const allNodesRowArray = [];
     for (let col = 0; col < this.width; col++) {
-      //the node can be a start node or target node or unvisited node
-
       const id = `${row}-${col}`;
       let nodeStatus;
       if (
@@ -66,6 +72,8 @@ Board.prototype.createGrid = function () {
   }
   gridContainer.innerHTML = htmlOfGrid;
 };
+
+// -----------------------FUNCTION FOR ADDING LISTENERS TO GRID --------------
 
 Board.prototype.addEventListeners = function () {
   for (let row = 0; row < this.height; row++) {
@@ -134,8 +142,16 @@ Board.prototype.addEventListeners = function () {
   }
 };
 
+// --------------FUNCTION FOR DEALING WITH START AND TARGET NODES------------
+
 Board.prototype.changeSpecialNode = function (currNode, currNodeElement) {}; //do
+
+// ---------------FUNCTION FOR REDOING THE ALGORITHM WHEN START AND TARGET ARE MOVED---------------
+
 Board.prototype.redoAlgo = function () {}; //do
+
+// --------------FUNCTION FOR DEALING WITH WALLS AND WEIGHTS------------
+
 Board.prototype.changeNormalNode = function (currNode, currNodeElement) {
   const unweightedAlgos = [`bfs`, `dfs`];
   if (!this.keyDown) {
@@ -151,10 +167,14 @@ Board.prototype.changeNormalNode = function (currNode, currNodeElement) {
   }
 };
 
+// -------------FUNCTION FOR ACCESSING NODE OF PROVIDED ID---------------
+
 Board.prototype.getNode = function (id) {
   const [i, j] = id.split(`-`);
   return this.allNodesArray[i][j];
 };
+
+// ---------------FUNCTION FOR PROVIDING TEXT FOR TUTORIAL-------------
 
 let counter = 0;
 
@@ -279,6 +299,8 @@ Board.prototype.contentInitialize = function () {
         </div>`);
 };
 
+// ------------------FUNCTION FOR BUTTONS AND DYNAMIC CONTENT OF TUTORIAL MODAL--------------
+
 Board.prototype.tutorialWork = function () {
   const board = this;
   const modal = document.querySelector(`.tuturialContainerModal`);
@@ -312,28 +334,12 @@ Board.prototype.tutorialWork = function () {
   });
 };
 
+// ------------FUNCTION FOR ACTIVATING AND DEACTIVATING CLICKS FOR ALL BUTTONS------------
+
 Board.prototype.toggleButtons = function () {
   //do
   console.log(`all buttons function`);
   //complete this function
-};
-
-Board.prototype.testMaze = function () {
-  for (let row = 0; row < this.height; row++) {
-    for (let col = 0; col < this.width; col++) {
-      if (
-        row === 0 ||
-        col === 0 ||
-        row === this.height - 1 ||
-        col === this.width - 1
-      ) {
-        const val = document.getElementById(`${row}-${col}`);
-        this.wallsAnimationArray.push(val);
-      }
-    }
-  }
-  console.log(this.wallsAnimationArray);
-  // mazeGenerator(this);
 };
 
 //----------------MAKING BOARD OBJECT-------------
@@ -346,4 +352,13 @@ let width = Math.floor(docWidth / 26);
 let board = new Board(width, height);
 board.initialize();
 board.testMaze();
-window.addEventListener(`keydown`, (e) => (board.keyDown = e.keyCode));
+
+// ------------EVENT LISTENERS-------------------
+
+window.addEventListener(`keydown`, (e) => {
+  if (board.keyDown) {
+    board.keyDown = false;
+  } else {
+    board.keyDown = e.keyCode;
+  }
+});
