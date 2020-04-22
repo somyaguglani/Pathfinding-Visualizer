@@ -102,7 +102,7 @@ button {
   border-radius: 0.5em;
   width: fit-content;
   padding: 0.5em;
-  font-size: 0.9em;
+  font-size: 1em;
 }
 button:hover {
   background-color: #20cfac;
