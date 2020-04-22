@@ -1,3 +1,5 @@
+// ------------FUNCTION FOR GENERATING STAIR MAZE---------------------
+
 const specialNodes = [`start`, `target`];
 const stairMaze = (board) => {
   let row = board.height - 1;
