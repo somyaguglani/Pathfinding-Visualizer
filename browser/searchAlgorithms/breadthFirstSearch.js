@@ -15,13 +15,8 @@ const breadthFirstAlgo = (board) => {
   queue.push(root);
   visitedNodes[board.start] = true;
   while (queue.length) {
-    // console.log(`works`);
-    // debugger;
-    // console.log(queue);
     let currentNode = queue.shift();
-    // console.log(currentNode);
     board.nodesToAnimate.push(currentNode);
-    // console.log(board.nodesToAnimate);
     currentNode.status = `visited`;
     if (currentNode.id === board.target) return `success`;
 
@@ -37,7 +32,6 @@ const breadthFirstAlgo = (board) => {
       }
     });
   }
-  //   console.log(board.nodesToAnimate);
   return false;
 };
 
