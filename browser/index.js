@@ -1,7 +1,6 @@
 import Node from "../browser/Node.js";
 import mazeGenerator from "../browser/animations/mazeGenerator.js";
 import randomMaze from "../browser/mazeAlgorithms/randomMaze.js";
-import breadthFirstAlgo from "../browser/searchAlgorithms/breadthFirstSearch.js";
 const gridContainer = document.querySelector(`.grid`);
 const navbarContainer = document.querySelector(`.navbarContainer`);
 let navHeight = navbarContainer.offsetHeight;
@@ -26,6 +25,7 @@ function Board(width, height) {
   this.pressedStatus = `normal`;
   this.mouseDown = false;
   this.keyDown = false;
+  this.buttonsActivated = false;
 }
 
 // --------------------FUNCTION FOR INITIALIZING BOARD AREA----------------
@@ -338,9 +338,18 @@ Board.prototype.tutorialWork = function () {
 // ------------FUNCTION FOR ACTIVATING AND DEACTIVATING CLICKS FOR ALL BUTTONS------------
 
 Board.prototype.toggleButtons = function () {
-  //do
+  //complete this
   console.log(`all buttons function`);
-  //complete this function
+  this.buttonsActivated = !this.buttonsActivated;
+  const logo = document.querySelector(`.refreshLogo`);
+  logo.addEventListener(`click`, (e) => {
+    e.preventDefault();
+    location.reload();
+  });
+  const algoButton = document.querySelector(`.algoButton`);
+  algoButton.addEventListener(`click`, (e) => {
+    algoButton.classList.toggle(`selectedButton`);
+  });
 };
 
 //----------------MAKING BOARD OBJECT-------------
@@ -352,7 +361,6 @@ let height = Math.floor((docHeight - contentHeight - navHeight) / 28);
 let width = Math.floor(docWidth / 26);
 let board = new Board(width, height);
 board.initialize();
-breadthFirstAlgo(board);
 
 // ------------EVENT LISTENERS-------------------
 
@@ -363,3 +371,13 @@ window.addEventListener(`keydown`, (e) => {
     board.keyDown = e.keyCode;
   }
 });
+//tasks
+//change special nodes
+//redo algos
+//stop weights for unweighted algos
+//stop changing visited nodes to blank (they either become wall or weight)
+//function for checking for weights before doing unweighted algos
+//clear board
+//clear paths
+//draw shorest path
+//toggle buttons

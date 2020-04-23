@@ -5,7 +5,6 @@ function Node(id, status) {
   this.status = status;
   this.weight = 0;
   this.previousNode = null;
-
 }
 
 export default Node;
