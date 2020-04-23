@@ -339,17 +339,21 @@ Board.prototype.tutorialWork = function () {
 
 Board.prototype.toggleButtons = function () {
   //complete this
-  console.log(`all buttons function`);
   this.buttonsActivated = !this.buttonsActivated;
   const logo = document.querySelector(`.refreshLogo`);
   logo.addEventListener(`click`, (e) => {
     e.preventDefault();
     location.reload();
   });
-  const algoButton = document.querySelector(`.algoButton`);
-  algoButton.addEventListener(`click`, (e) => {
-    algoButton.classList.toggle(`selectedButton`);
+
+  const dropDowns = document.querySelectorAll(`.dropDown`);
+  dropDowns.forEach((linkButton) => {
+    linkButton.addEventListener(`click`, (e) => {
+      linkButton.classList.toggle(`displayDropdown`);
+    });
   });
+
+  const algoOptions = document.querySelectorAll(`.algoOptions`);
 };
 
 //----------------MAKING BOARD OBJECT-------------
@@ -371,7 +375,7 @@ window.addEventListener(`keydown`, (e) => {
     board.keyDown = e.keyCode;
   }
 });
-//tasks
+//tasks for js
 //change special nodes
 //redo algos
 //stop weights for unweighted algos
@@ -381,3 +385,8 @@ window.addEventListener(`keydown`, (e) => {
 //clear paths
 //draw shorest path
 //toggle buttons
+
+//tasks for css
+//change color of dropdowns on click
+//rest of animations
+//how to make dropdown close is mouse up good?

@@ -59,8 +59,8 @@ button {
   margin: 0em 0.5em;
   font-size: 0.8em;
 }
-/* make this a class to toggle */
-.navbarContainer ul li:hover > ul {
+
+.navbarContainer ul li.displayDropdown > ul {
   display: flex;
   margin: 1em;
   padding: 0.4em 0em;
@@ -524,3 +524,5 @@ strong {
     background-color: rgb(255, 254, 106);
   }
 }
+
+/* --------- ACTIVATING AND DEACTIVATING NAVBAR----------- */
