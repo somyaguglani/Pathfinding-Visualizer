@@ -1,6 +1,7 @@
 import Node from "../browser/Node.js";
 import mazeGenerator from "../browser/animations/mazeGenerator.js";
 import randomMaze from "../browser/mazeAlgorithms/randomMaze.js";
+import breadthFirstAlgo from "../browser/searchAlgorithms/breadthFirstSearch.js";
 const gridContainer = document.querySelector(`.grid`);
 const navbarContainer = document.querySelector(`.navbarContainer`);
 let navHeight = navbarContainer.offsetHeight;
@@ -20,6 +21,7 @@ function Board(width, height) {
   this.start = ``;
   this.target = ``;
   this.allNodesArray = [];
+  this.nodesToAnimate = [];
   this.tutorialContentArray = [];
   this.pressedStatus = `normal`;
   this.mouseDown = false;
@@ -350,6 +352,7 @@ let height = Math.floor((docHeight - contentHeight - navHeight) / 28);
 let width = Math.floor(docWidth / 26);
 let board = new Board(width, height);
 board.initialize();
+breadthFirstAlgo(board);
 
 // ------------EVENT LISTENERS-------------------
 
