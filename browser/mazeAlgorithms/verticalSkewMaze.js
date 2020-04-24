@@ -69,7 +69,7 @@ const verticalSkewMaze = (
     if (currentRow - 2 - rowsi > colei - colsi) {
       verticalSkewMaze(
         board,
-        roesi,
+        rowsi,
         currentRow - 2,
         colsi,
         colei,
@@ -79,7 +79,7 @@ const verticalSkewMaze = (
     } else {
       verticalSkewMaze(
         board,
-        roesi,
+        rowsi,
         currentRow - 2,
         colsi,
         colei,

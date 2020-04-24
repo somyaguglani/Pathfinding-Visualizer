@@ -69,7 +69,7 @@ const horizontalSkewMaze = (
     if (currentRow - 2 - rowsi > colei - colsi) {
       horizontalSkewMaze(
         board,
-        roesi,
+        rowsi,
         currentRow - 2,
         colsi,
         colei,
@@ -79,7 +79,7 @@ const horizontalSkewMaze = (
     } else {
       horizontalSkewMaze(
         board,
-        roesi,
+        rowsi,
         currentRow - 2,
         colsi,
         colei,

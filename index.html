@@ -20,14 +20,14 @@
           >
 
           <ul class="absolute-pc">
-            <li><a class="algoOptions" href="#">A* Search</a></li>
-            <li><a class="algoOptions" href="#">Dijkstra's Algorithm</a></li>
-            <li><a class="algoOptions" href="#">Greedy Best-first Search </a></li>
+            <li><a id  = "astar" class="algoOptions" href="#">A* Search</a></li>
+            <li><a id  = "dijkstra" class="algoOptions" href="#">Dijkstra's Algorithm</a></li>
+            <li><a id  = "bestfirst" class="algoOptions" href="#">Greedy Best-first Search </a></li>
             <!-- <li><a href="#">Swarm Algorithm </a></li>
             <li><a href="#">Convergent Swarm Algorithm </a></li>
             <li><a href="#">Bidirectional Swarm Algorithm </a></li> -->
-            <li><a class="algoOptions" href="#">Breadth-first Search</a></li>
-            <li><a class="algoOptions" href="#">Depth-first Search</a></li>
+            <li><a id  = "breadthfirst" class="algoOptions" href="#">Breadth-first Search</a></li>
+            <li><a id  = "depthfirst" class="algoOptions" href="#">Depth-first Search</a></li>
           </ul>
         </li>
         <li class="dropDown">
@@ -36,17 +36,18 @@
           >
           <ul class="absolute-pc">
             <!-- <li><a href="#">Recursive Division</a></li> -->
-            <li><a href="#">Recursive Division(vertical skew)</a></li>
-            <li><a href="#">Recursive Division(horizontal skew)</a></li>
-            <li><a href="#">Basic Random Maze</a></li>
-            <li><a href="#">Basic Weight Maze</a></li>
-            <li><a href="#">Simple Stair Pattern</a></li>
+            <li><a class = "maze" id="verticalskew" href="#">Recursive Division(vertical skew)</a></li>
+            <li><a class = "maze" id="horizontalskew"   href="#">Recursive Division(horizontal skew)</a></li>
+            <li><a class = "maze" id="randomwall"  href="#">Basic Random Maze</a></li>
+            <li><a class = "maze" id="randomweight"  href="#">Basic Weight Maze</a></li>
+            <li><a class = "maze" id="stair"  href="#">Simple Stair Pattern</a></li>
           </ul>
         </li>
         <li>
           <button class="visualizeButton">Visualize!</button>
         </li>
-        <li><a href="#">Clear Board</a></li>
+        <li><a class="clearBoard"  href="#">Clear Board</a></li>
+        <li><a href="#">Clear Walls & Weights</a></li>
         <li><a href="#">Clear Path</a></li>
         <li class="dropDown">
           <a href="#"
@@ -54,9 +55,9 @@
           </a>
 
           <ul class="absolute-pc">
-            <li><a href="#">Fast</a></li>
-            <li><a href="#">Average</a></li>
-            <li><a href="#">Slow</a></li>
+            <li><a class="speeds" id = "fast" href="#">Fast</a></li>
+            <li><a  class="speeds" id = "average" href="#">Average</a></li>
+            <li><a  class="speeds" id = "slow" href="#">Slow</a></li>
           </ul>
         </li>
       </ul>

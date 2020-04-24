@@ -2,9 +2,9 @@
 
 const mazeGenerator = (board) => {
   let speed = 0;
-  if (board.speed === `fast`) speed = 5;
-  else if (board.speed === `average`) speed = 25;
-  else if (board.speed === `slow`) speed = 75;
+  if (board.speed === `fast`) speed = 15;
+  else if (board.speed === `average`) speed = 35;
+  else if (board.speed === `slow`) speed = 85;
 
   for (
     let currIndex = 0;
@@ -13,7 +13,6 @@ const mazeGenerator = (board) => {
   ) {
     setTimeout(() => {
       const currElement = board.wallsAnimationArray[currIndex];
-      console.log(currElement);
       const [i, j] = currElement.id.split(`-`);
       const currNode = board.allNodesArray[i][j];
       currElement.className =

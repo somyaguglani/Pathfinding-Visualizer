@@ -1,6 +1,9 @@
 import Node from "../browser/Node.js";
 import mazeGenerator from "../browser/animations/mazeGenerator.js";
 import randomMaze from "../browser/mazeAlgorithms/randomMaze.js";
+import verticalSkew from "../browser/mazeAlgorithms/verticalSkewMaze.js";
+import horizontalSkew from "../browser/mazeAlgorithms/horizontalSkewMaze.js";
+import stairMaze from "../browser/mazeAlgorithms/stairMaze.js";
 const gridContainer = document.querySelector(`.grid`);
 const navbarContainer = document.querySelector(`.navbarContainer`);
 let navHeight = navbarContainer.offsetHeight;
@@ -340,20 +343,117 @@ Board.prototype.tutorialWork = function () {
 Board.prototype.toggleButtons = function () {
   //complete this
   this.buttonsActivated = !this.buttonsActivated;
+
   const logo = document.querySelector(`.refreshLogo`);
-  logo.addEventListener(`click`, (e) => {
-    e.preventDefault();
-    location.reload();
-  });
-
   const dropDowns = document.querySelectorAll(`.dropDown`);
-  dropDowns.forEach((linkButton) => {
-    linkButton.addEventListener(`click`, (e) => {
-      linkButton.classList.toggle(`displayDropdown`);
-    });
-  });
-
+  const visualizeButton = document.querySelector(`.visualizeButton`);
+  const algoDescription = document.querySelector(`.algoDescription`);
   const algoOptions = document.querySelectorAll(`.algoOptions`);
+  const mazes = document.querySelectorAll(`.maze`);
+  const speeds = document.querySelectorAll(`.speeds`);
+
+  if (this.buttonsActivated === true) {
+    logo.addEventListener(`click`, (e) => {
+      e.preventDefault();
+      location.reload();
+    });
+
+    dropDowns.forEach((linkButton) => {
+      linkButton.addEventListener(`click`, (e) => {
+        console.log(`working`);
+        linkButton.classList.toggle(`displayDropdown`);
+      });
+    });
+
+    //add connections
+    visualizeButton.addEventListener(`click`, (e) => {
+      if (this.algo.length === 0) {
+        e.currentTarget.innerHTML = `Pick an Algorithm!`;
+        return;
+      }
+
+      if (this.algo === `astar`) {
+      } else if (this.algo === `dijkstra`) {
+      } else if (this.algo === `bestfirst`) {
+      } else if (this.algo === `breadthfirst`) {
+      } else if (this.algo === `depthfirst`) {
+      }
+    });
+
+    algoOptions.forEach((algo) => {
+      algo.addEventListener(`click`, (e) => {
+        this.algo = e.currentTarget.id;
+        if (this.algo === `astar`) {
+          visualizeButton.innerHTML = `Visualize A* !`;
+          algoDescription.innerHTML = `A* Search is <strong>weighted</strong> and <strong>guarantees</strong> the shortest path!`;
+        } else if (this.algo === `dijkstra`) {
+          visualizeButton.innerHTML = `Visualize Dijkstra's !`;
+          algoDescription.innerHTML = `Dijkstra's Algorithm is <strong>weighted</strong> and <strong>guarantees</strong> the shortest path!`;
+        } else if (this.algo === `bestfirst`) {
+          visualizeButton.innerHTML = `Visualize Greedy !`;
+          algoDescription.innerHTML = `Greedy Best-first Search is <strong>weighted</strong> and <strong>does not guarantee</strong> the shortest path!`;
+        } else if (this.algo === `breadthfirst`) {
+          visualizeButton.innerHTML = `Visualize BFS !`;
+          algoDescription.innerHTML = `Breadth-first Search is <strong>unweighted</strong> and <strong>guarantees</strong> the shortest path!`;
+        } else if (this.algo === `depthfirst`) {
+          visualizeButton.innerHTML = `Visualize DFS !`;
+          algoDescription.innerHTML = `Depth-first Search is <strong>unweighted</strong> and <strong>does not guarantee</strong> the shortest path!`;
+        }
+      });
+    });
+
+    //add connections
+    mazes.forEach((maze) => {
+      maze.addEventListener(`click`, (e) => {
+        const currentMaze = e.currentTarget.id;
+        //run clear walls and weights and path function here
+        //run toggle buttons here
+        this.toggleButtons();
+        if (currentMaze === `verticalskew`) {
+          console.log(`verticalskew`);
+          verticalSkew(
+            this,
+            2,
+            this.height - 3,
+            2,
+            this.width - 3,
+            "vertical",
+            false
+          );
+          mazeGenerator(this);
+        } else if (currentMaze === `horizontalskew`) {
+          console.log(`horizontalskew`);
+          horizontalSkew(
+            this,
+            2,
+            this.height - 3,
+            2,
+            this.width - 3,
+            "horizontal",
+            false
+          );
+          mazeGenerator(this);
+        } else if (currentMaze === `randomwall`) {
+          console.log(`randomwall`);
+          randomMaze(this, `wall`);
+        } else if (currentMaze === `randomweight`) {
+          console.log(`randomweight`);
+          randomMaze(this, `weight`);
+        } else if (currentMaze === `stair`) {
+          console.log(`stair`);
+          stairMaze(this);
+          mazeGenerator(this);
+        }
+      });
+    });
+
+    speeds.forEach((speed) => {
+      speed.addEventListener(`click`, (e) => {
+        this.speed = e.currentTarget.id;
+      });
+    });
+  } else {
+  }
 };
 
 //----------------MAKING BOARD OBJECT-------------
@@ -361,8 +461,8 @@ Board.prototype.toggleButtons = function () {
 let contentHeight = mainContentContainer.offsetHeight;
 let docHeight = document.documentElement.scrollHeight;
 let docWidth = document.documentElement.scrollWidth;
-let height = Math.floor((docHeight - contentHeight - navHeight) / 28);
-let width = Math.floor(docWidth / 26);
+let height = Math.floor((docHeight - contentHeight - navHeight) / 24);
+let width = Math.floor(docWidth / 23);
 let board = new Board(width, height);
 board.initialize();
 
@@ -376,16 +476,15 @@ window.addEventListener(`keydown`, (e) => {
   }
 });
 //tasks for js
+//clear walls and weight has been added (start target don't move) write it's function
 //change special nodes
 //redo algos
 //stop weights for unweighted algos
 //stop changing visited nodes to blank (they either become wall or weight)
 //function for checking for weights before doing unweighted algos
-//clear board
-//clear paths
 //draw shorest path
-//toggle buttons
-
+//toggle buttons-> add connections and write functions for clear weights and walls , clear board , clear path
+//clearboard - should i just do this = new Board
 //tasks for css
 //change color of dropdowns on click
 //rest of animations
