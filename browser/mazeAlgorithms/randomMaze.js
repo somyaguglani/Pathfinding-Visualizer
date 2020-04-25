@@ -22,6 +22,7 @@ const randomMaze = (board, type) => {
       }
     }
   }
+  board.toggleButtons();
 };
 
 export default randomMaze;

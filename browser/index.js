@@ -345,6 +345,35 @@ Board.prototype.tutorialWork = function () {
 // ------------FUNCTION FOR ACTIVATING AND DEACTIVATING CLICKS FOR ALL BUTTONS------------
 Board.prototype.toggleButtons = function () {
   this.buttonsActivated = !this.buttonsActivated;
+
+  const algoOptions = document.querySelectorAll(`.algoOptions`);
+  const mazes = document.querySelectorAll(`.maze`);
+  const speeds = document.querySelectorAll(`.speeds`);
+  const visualizeButton = document.querySelector(`.visualizeButton`);
+
+  if (this.buttonsActivated === false) {
+    algoOptions.forEach((option) => {
+      option.classList.add(`activatedLink`);
+    });
+    mazes.forEach((maze) => {
+      maze.classList.add(`activatedLink`);
+    });
+    speeds.forEach((speed) => {
+      speed.classList.add(`activatedLink`);
+    });
+    visualizeButton.classList.add(`activatedLink`);
+  } else {
+    algoOptions.forEach((option) => {
+      option.classList.remove(`activatedLink`);
+    });
+    mazes.forEach((maze) => {
+      maze.classList.remove(`activatedLink`);
+    });
+    speeds.forEach((speed) => {
+      speed.classList.remove(`activatedLink`);
+    });
+    visualizeButton.classList.remove(`activatedLink`);
+  }
 };
 
 // ------------FUNCTION FOR ATTACHING LISTENERS FOR REST OF THE BUTTONS------------
