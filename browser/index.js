@@ -82,73 +82,69 @@ Board.prototype.createGrid = function () {
 Board.prototype.addEventListeners = function () {
   for (let row = 0; row < this.height; row++) {
     for (let col = 0; col < this.width; col++) {
-      //start work
-      const currNodeId = `${row}-${col}`;
-      const currNodeElement = document.getElementById(`${currNodeId}`);
-      const currNode = this.getNode(currNodeId);
+      const currentNodeId = `${row}-${col}`;
+      const currentNodeElement = document.getElementById(currentNodeId);
+      const currentNode = this.allNodesArray[row][col];
 
-      //work for mousedown
-      currNodeElement.addEventListener(`mousedown`, (e) => {
+      currentNodeElement.addEventListener(`mousedown`, (e) => {
         e.preventDefault();
-        if (1) {
-          //this.buttonsOn
+        if (this.buttonsActivated) {
           this.mouseDown = true;
-          if (currNode.status === `start` || currNode.status === `target`) {
-            this.pressedStatus = currNode.status;
+          if (
+            currentNode.status === `start` ||
+            currentNode.status === `target`
+          ) {
+            this.pressedStatus = currentNode.status;
           } else {
             this.pressedStatus = `normal`;
-            this.changeNormalNode(currNode, currNodeElement);
+            this.changeNormalNode(currentNode, currentNodeElement);
           }
         }
       });
-      //work for mouseup
 
-      currNodeElement.addEventListener(`mouseup`, (e) => {
-        if (1) {
-          //this.buttonsOn
+      currentNodeElement.addEventListener(`mouseup`, (e) => {
+        if (this.buttonsActivated) {
           this.mouseDown = false;
-          if (this.pressedStatus === `start`) this.start = currNodeId;
-          else if (this.pressedStatus === `target`) this.target = currNodeId;
-          // this.pressedStatus= `normal`;  is this imp not yet decided
+          if (this.pressedStatus === `target`) this.target = currentNodeId;
+          else if (this.pressedStatus === `start`) this.start = currentNodeId;
+          this.pressedStatus = `normal`;
         }
       });
 
-      //work for mouse enter
-      currNodeElement.addEventListener(`mouseenter`, (e) => {
-        if (1) {
-          //this.buttonsOn
+      currentNodeElement.addEventListener(`mouseenter`, (e) => {
+        if (this.buttonsActivated) {
           if (this.mouseDown && this.pressedStatus !== `normal`) {
-            this.changeSpecialNode(currNode, currNodeElement);
-            if (currNode.status === `start`) {
-              this.start = currNodeId;
+            this.changeSpecialNode(currentNode, currentNodeElement);
+            if (this.pressedStatus === `target`) {
+              this.target = currentNodeId;
               if (this.algoComplete) this.redoAlgo();
-            } else if (currNode.status === `target`) {
-              this.target = currNodeId;
+            } else if (this.pressedStatus === `start`) {
+              this.start = currentNodeId;
               if (this.algoComplete) this.redoAlgo();
             }
           } else if (this.mouseDown) {
-            this.changeNormalNode(currNode, currNodeElement);
+            this.changeNormalNode(currentNode, currentNodeElement);
           }
         }
       });
 
-      //work for mouse leave
-      currNodeElement.addEventListener(`mouseleave`, () => {
-        if (1) {
-          //this.buttinsOn
+      currentNodeElement.addEventListener(`mouseleave`, (e) => {
+        if (this.buttonsActivated) {
           if (this.mouseDown && this.pressedStatus !== `normal`) {
-            this.changeSpecialNode(currNode, currNodeElement);
+            this.changeSpecialNode(currentNode, currentNodeElement);
           }
         }
       });
-      //end work
     }
   }
 };
 
 // --------------FUNCTION FOR DEALING WITH START AND TARGET NODES------------
 
-Board.prototype.changeSpecialNode = function (currNode, currNodeElement) {}; //do
+Board.prototype.changeSpecialNode = function (
+  currentNode,
+  currentNodeElement
+) {}; //do
 
 // ---------------FUNCTION FOR REDOING THE ALGORITHM WHEN START AND TARGET ARE MOVED---------------
 
@@ -157,17 +153,24 @@ Board.prototype.redoAlgo = function () {}; //do
 // --------------FUNCTION FOR DEALING WITH WALLS AND WEIGHTS------------
 
 Board.prototype.changeNormalNode = function (currNode, currNodeElement) {
-  const unweightedAlgos = [`bfs`, `dfs`];
+  const specialNodes = [`start`, `target`];
+  const unweightedalgos = [`breadthfirst`, `depthfirst`];
   if (!this.keyDown) {
-    currNodeElement.className =
-      currNode.status === `unvisited` ? `wall` : `unvisited`;
-    currNode.status = currNodeElement.className;
-  } else if (this.keyDown === 87 && !unweightedAlgos.includes(this.algo)) {
-    console.log(`weights`);
-    currNodeElement.className =
-      currNode.weight !== 15 ? `unvisited weight` : `unvisited`;
-    currNode.weight = currNodeElement.className === `unvisited weight` ? 15 : 0;
-    currNode.status = `unvisited`;
+    if (!specialNodes.includes(currNode.status)) {
+      currNodeElement.className =
+        currNode.status !== `wall` ? `wall` : `unvisited`;
+      currNode.status =
+        currNodeElement.className !== `wall` ? `unvisited` : `wall`;
+      currNode.weight = 0;
+    }
+  } else if (this.keyDown === 87 && !unweightedalgos.includes(this.algo)) {
+    if (!specialNodes.includes(currNode.status)) {
+      currNodeElement.className =
+        currNode.weight !== 15 ? `unvisited weight` : `unvisited`;
+      currNode.weight =
+        currNodeElement.className !== `unvisited weight` ? 0 : 15;
+      currNode.status = `unvisited`;
+    }
   }
 };
 
@@ -352,12 +355,12 @@ Board.prototype.toggleButtons = function () {
   const mazes = document.querySelectorAll(`.maze`);
   const speeds = document.querySelectorAll(`.speeds`);
 
-  if (this.buttonsActivated === true) {
-    logo.addEventListener(`click`, (e) => {
-      e.preventDefault();
-      location.reload();
-    });
+  logo.addEventListener(`click`, (e) => {
+    e.preventDefault();
+    location.reload();
+  });
 
+  if (this.buttonsActivated === true) {
     dropDowns.forEach((linkButton) => {
       linkButton.addEventListener(`click`, (e) => {
         console.log(`working`);
@@ -481,6 +484,9 @@ window.addEventListener(`keydown`, (e) => {
 //redo algos
 //stop weights for unweighted algos
 //stop changing visited nodes to blank (they either become wall or weight)
+//do algos
+// launch animations
+//launch instant animations
 //function for checking for weights before doing unweighted algos
 //draw shorest path
 //toggle buttons-> add connections and write functions for clear weights and walls , clear board , clear path
