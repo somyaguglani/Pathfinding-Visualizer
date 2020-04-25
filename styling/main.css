@@ -75,6 +75,12 @@ button {
   font-size: 1em;
   font-weight: 700;
 }
+
+.navbarContainer a[id="dropLinks"].activatedLink {
+  background: #34495e;
+  color: rgb(82, 236, 236);
+}
+
 .navbarContainer ul li > a:hover {
   color: #1abc9c;
 }

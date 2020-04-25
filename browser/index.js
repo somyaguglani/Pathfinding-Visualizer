@@ -38,6 +38,7 @@ Board.prototype.initialize = function () {
   this.createGrid();
   this.addEventListeners();
   this.tutorialWork();
+  this.restOfListeners();
 };
 
 // -----------FUNCTION FOR CREATING GRID----------------
@@ -342,10 +343,14 @@ Board.prototype.tutorialWork = function () {
 };
 
 // ------------FUNCTION FOR ACTIVATING AND DEACTIVATING CLICKS FOR ALL BUTTONS------------
-
 Board.prototype.toggleButtons = function () {
-  //complete this
   this.buttonsActivated = !this.buttonsActivated;
+};
+
+// ------------FUNCTION FOR ATTACHING LISTENERS FOR REST OF THE BUTTONS------------
+
+Board.prototype.restOfListeners = function () {
+  //complete this
 
   const logo = document.querySelector(`.refreshLogo`);
   const dropDowns = document.querySelectorAll(`.dropDown`);
@@ -360,16 +365,19 @@ Board.prototype.toggleButtons = function () {
     location.reload();
   });
 
-  if (this.buttonsActivated === true) {
-    dropDowns.forEach((linkButton) => {
-      linkButton.addEventListener(`click`, (e) => {
-        console.log(`working`);
-        linkButton.classList.toggle(`displayDropdown`);
-      });
+  dropDowns.forEach((linkButton) => {
+    linkButton.addEventListener(`click`, (e) => {
+      console.log(`dropdown is changing`);
+      linkButton.classList.toggle(`displayDropdown`);
+      const link = linkButton.querySelector(`a`);
+      link.classList.toggle(`activatedLink`);
     });
+  });
 
-    //add connections
-    visualizeButton.addEventListener(`click`, (e) => {
+  //add connections
+  visualizeButton.addEventListener(`click`, (e) => {
+    if (this.buttonsActivated) {
+      console.log(`algos are changing`);
       if (this.algo.length === 0) {
         e.currentTarget.innerHTML = `Pick an Algorithm!`;
         return;
@@ -381,10 +389,14 @@ Board.prototype.toggleButtons = function () {
       } else if (this.algo === `breadthfirst`) {
       } else if (this.algo === `depthfirst`) {
       }
-    });
+    }
+  });
 
-    algoOptions.forEach((algo) => {
-      algo.addEventListener(`click`, (e) => {
+  algoOptions.forEach((algo) => {
+    algo.addEventListener(`click`, (e) => {
+      if (this.buttonsActivated) {
+        console.log(`algo content is changing`);
+
         this.algo = e.currentTarget.id;
         if (this.algo === `astar`) {
           visualizeButton.innerHTML = `Visualize A* !`;
@@ -402,12 +414,15 @@ Board.prototype.toggleButtons = function () {
           visualizeButton.innerHTML = `Visualize DFS !`;
           algoDescription.innerHTML = `Depth-first Search is <strong>unweighted</strong> and <strong>does not guarantee</strong> the shortest path!`;
         }
-      });
+      }
     });
+  });
 
-    //add connections
-    mazes.forEach((maze) => {
-      maze.addEventListener(`click`, (e) => {
+  //add connections
+  mazes.forEach((maze) => {
+    maze.addEventListener(`click`, (e) => {
+      if (this.buttonsActivated) {
+        console.log(`maze is generating`);
         const currentMaze = e.currentTarget.id;
         //run clear walls and weights and path function here
         //run toggle buttons here
@@ -447,16 +462,18 @@ Board.prototype.toggleButtons = function () {
           stairMaze(this);
           mazeGenerator(this);
         }
-      });
+      }
     });
+  });
 
-    speeds.forEach((speed) => {
-      speed.addEventListener(`click`, (e) => {
+  speeds.forEach((speed) => {
+    speed.addEventListener(`click`, (e) => {
+      if (this.buttonsActivated) {
+        console.log(`speed is changing`);
         this.speed = e.currentTarget.id;
-      });
+      }
     });
-  } else {
-  }
+  });
 };
 
 //----------------MAKING BOARD OBJECT-------------
