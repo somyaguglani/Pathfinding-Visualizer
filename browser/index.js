@@ -4,6 +4,8 @@ import randomMaze from "../browser/mazeAlgorithms/randomMaze.js";
 import verticalSkew from "../browser/mazeAlgorithms/verticalSkewMaze.js";
 import horizontalSkew from "../browser/mazeAlgorithms/horizontalSkewMaze.js";
 import stairMaze from "../browser/mazeAlgorithms/stairMaze.js";
+import unweightedAlgorithms from "../browser/searchAlgorithms/unweightedAlgorithms.js";
+import launchAnimations from "../browser/animations/launchAnimations.js";
 const gridContainer = document.querySelector(`.grid`);
 const navbarContainer = document.querySelector(`.navbarContainer`);
 let navHeight = navbarContainer.offsetHeight;
@@ -342,7 +344,8 @@ Board.prototype.tutorialWork = function () {
   });
 };
 
-// ------------FUNCTION FOR ACTIVATING AND DEACTIVATING CLICKS FOR ALL BUTTONS------------
+// ------------FUNCTION FOR ACTIVATING AND DEACTIVATING CLICKS FOR ALL BUTTONS-------------
+
 Board.prototype.toggleButtons = function () {
   this.buttonsActivated = !this.buttonsActivated;
 
@@ -350,6 +353,7 @@ Board.prototype.toggleButtons = function () {
   const mazes = document.querySelectorAll(`.maze`);
   const speeds = document.querySelectorAll(`.speeds`);
   const visualizeButton = document.querySelector(`.visualizeButton`);
+  const clearLinks = document.querySelectorAll(`.clearLinks`);
 
   if (this.buttonsActivated === false) {
     algoOptions.forEach((option) => {
@@ -358,9 +362,13 @@ Board.prototype.toggleButtons = function () {
     mazes.forEach((maze) => {
       maze.classList.add(`activatedLink`);
     });
+    clearLinks.forEach((link) => {
+      link.classList.add(`activatedLink`);
+    });
     speeds.forEach((speed) => {
       speed.classList.add(`activatedLink`);
     });
+
     visualizeButton.classList.add(`activatedLink`);
   } else {
     algoOptions.forEach((option) => {
@@ -368,6 +376,9 @@ Board.prototype.toggleButtons = function () {
     });
     mazes.forEach((maze) => {
       maze.classList.remove(`activatedLink`);
+    });
+    clearLinks.forEach((link) => {
+      link.classList.remove(`activatedLink`);
     });
     speeds.forEach((speed) => {
       speed.classList.remove(`activatedLink`);
@@ -396,9 +407,17 @@ Board.prototype.restOfListeners = function () {
 
   dropDowns.forEach((linkButton) => {
     linkButton.addEventListener(`click`, (e) => {
-      console.log(`dropdown is changing`);
-      linkButton.classList.toggle(`displayDropdown`);
-      const link = linkButton.querySelector(`a`);
+      // change this
+      dropDowns.forEach((dropdown) => {
+        if (dropdown !== e.currentTarget) {
+          dropdown.classList.remove(`displayDropdown`);
+          const a = dropdown.querySelector(`a`);
+          a.classList.remove(`activatedLink`);
+        }
+      });
+
+      e.currentTarget.classList.toggle(`displayDropdown`);
+      const link = e.currentTarget.querySelector(`a`);
       link.classList.toggle(`activatedLink`);
     });
   });
@@ -454,7 +473,6 @@ Board.prototype.restOfListeners = function () {
         console.log(`maze is generating`);
         const currentMaze = e.currentTarget.id;
         //run clear walls and weights and path function here
-        //run toggle buttons here
         this.toggleButtons();
         if (currentMaze === `verticalskew`) {
           console.log(`verticalskew`);
@@ -525,19 +543,17 @@ window.addEventListener(`keydown`, (e) => {
   }
 });
 //tasks for js
-//clear walls and weight has been added (start target don't move) write it's function
-//change special nodes
+//write algos
+//write launch animations and launch instant animations
+//write draw and animate shortest path
+//write clearboard , clear walls and weights , clear path
 //redo algos
-//stop weights for unweighted algos
+//change special nodes
+//stop weights for unweighted algos , write a function for that
 //stop changing visited nodes to blank (they either become wall or weight)
-//do algos
-// launch animations
-//launch instant animations
 //function for checking for weights before doing unweighted algos
-//draw shorest path
-//toggle buttons-> add connections and write functions for clear weights and walls , clear board , clear path
 //clearboard - should i just do this = new Board
 //tasks for css
-//change color of dropdowns on click
 //rest of animations
 //how to make dropdown close is mouse up good?
+export default board.getNode;
