@@ -1,3 +1,5 @@
+// While breadthfirst search uses a queue to visit nodes of all children connected to the node , depthfirst uses a stack and explores in one direction completely and then others .
+
 // ---------------------FUNCTION FOR BREADTH-FIRST AND DEPTH-FIRST SEARCH--------------------
 
 const unweightedAlgorithm = (board, type) => {

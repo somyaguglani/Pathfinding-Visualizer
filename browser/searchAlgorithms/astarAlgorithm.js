@@ -1,4 +1,12 @@
-const astarAlgorithm = (board, heuristic) => {
+//The basic approach of A* is that it precomputes distances before taking decisions on what to choose
+// It consists of g-cost which is the distance from start node and h-cost which is the distance from target
+//f-cost = g-cost + h-cost.
+
+//A* is called with the help of bidirectional.js file
+
+//---------------------FUNCTION FOR A* ALGORITHM------------------------
+
+const astarAlgorithm = (board) => {
   if (
     board.start.length === 0 ||
     board.target.length === 0 ||
@@ -16,7 +24,7 @@ const astarAlgorithm = (board, heuristic) => {
       unvisitedNodes.push(`${row}-${col}`);
     }
   }
-  console.log(unvisitedNodes);
+
   while (unvisitedNodes.length) {
     let currentNode = closestNode(board, unvisitedNodes);
     while (currentNode.status === `wall` && unvisitedNodes.length) {
@@ -28,11 +36,11 @@ const astarAlgorithm = (board, heuristic) => {
     if (currentNode.id === board.target) {
       return `success`;
     }
-    updateNeighbors(board, currentNode, heuristic);
+    updateNeighbors(board, currentNode);
   }
 };
 
-// --------------astar
+// ------------FUNCTION FOR GETTING THE CLOSEST NODE ACCORDING TO DISTANCES---------------
 
 const closestNode = (board, unvisitedNodes) => {
   let currentClosest;
@@ -63,6 +71,8 @@ const closestNode = (board, unvisitedNodes) => {
   return currentClosest;
 };
 
+// ---------------------FUNCTION FOR GETTING DIFFERENCE OF DISTANCE BETWEEN TWO NODES---------------
+
 const manhattanDistance = (firstNode, secondNode) => {
   const firstNodeCoordinates = firstNode.id
     .split(`-`)
@@ -79,6 +89,8 @@ const manhattanDistance = (firstNode, secondNode) => {
 
   return deltax + deltay;
 };
+
+// -------------------FUNCTION FOR EXPLORING FOUR NEIGHBOURS OF A NODE --------------------
 
 const getNeighbors = (id, board) => {
   let coordinates = id.split(`-`);
@@ -113,7 +125,9 @@ const getNeighbors = (id, board) => {
   return neighbors;
 };
 
-const updateNeighbors = (board, currentNode, heuristic) => {
+// ----------------FUNCTIONS FOR UPDATING THE DISTANCES OF NEIGHBOURS RELATIVE TO START AND TARGET NODE -----------------
+
+const updateNeighbors = (board, currentNode) => {
   let neighbours = getNeighbors(currentNode.id, board);
   for (let neighbour of neighbours) {
     if (board.target.length !== 0) {
@@ -146,6 +160,8 @@ const updateNode = (currentNode, targetNode, actualTargetNode) => {
     targetNode.direction = distance[2];
   }
 };
+
+// -----------------FUNCTION FOR GETTING DISTANCE BETWEEN TWO NODES -----------------
 
 const getDistance = (nodeOne, nodeTwo) => {
   let currentCoordinates = nodeOne.id.split("-");
