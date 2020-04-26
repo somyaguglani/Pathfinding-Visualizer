@@ -305,6 +305,24 @@ strong {
   animation-play-state: running;
   animation-direction: alternate;
 }
+
+.startTransparent {
+  opacity: 0.5;
+  background-image: url("../styling/imagesAndSvg/triangletwo-right.svg");
+  background-color: rgb(255, 254, 106);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: specialNodes;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
 .target {
   background-image: url("./imagesAndSvg/circle.svg");
   background-position: center;
@@ -417,6 +435,70 @@ strong {
 .shortest-path.weight {
   background-color: rgb(255, 254, 106);
   background-image: url("./imagesAndSvg/weight.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: triangletwo;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.shortest-path-up {
+  background: url("../styling/imagesAndSvg/triangletwo-up.svg");
+  background-color: rgb(255, 254, 106);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: triangletwo;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.shortest-path-down {
+  background: url("../styling/imagesAndSvg/triangletwo-down.svg");
+  background-color: rgb(255, 254, 106);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: triangletwo;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.shortest-path-right {
+  background: url("../styling/imagesAndSvg/triangletwo-right.svg");
+  background-color: rgb(255, 254, 106);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: triangletwo;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.shortest-path-left {
+  background: url("../styling/imagesAndSvg/triangletwo-left.svg");
+  background-color: rgb(255, 254, 106);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

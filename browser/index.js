@@ -32,6 +32,7 @@ function Board(width, height) {
   this.mouseDown = false;
   this.keyDown = false;
   this.buttonsActivated = false;
+  this.shortestPathNodesToAnimate = [];
 }
 
 // --------------------FUNCTION FOR INITIALIZING BOARD AREA----------------
@@ -185,6 +186,99 @@ Board.prototype.getNode = function (id) {
   return this.allNodesArray[i][j];
 };
 
+//-----------------FUNCTION FOR GETTING SHORTEST PATH IN ARRAY -----------------
+
+Board.prototype.addShortestPath = function (type) {
+  let currentNode;
+  currentNode = this.getNode(this.getNode(this.target).previousNode);
+  while (currentNode.id !== this.start) {
+    this.shortestPathNodesToAnimate.unshift(currentNode);
+    if (type === `draw`) {
+      document.getElementById(currentNode.id).className = `shortest-path`;
+    }
+    currentNode = this.getNode(currentNode.previousNode.id);
+  }
+};
+
+//draw means class added,  add means not for type
+
+//---------------------FUNCTION FOR DRAWING SHORTEST PATH---------------------
+
+Board.prototype.drawShortestPathTimeout = function (type) {
+  let currentNode;
+  let secondCurrentNode;
+  let currentNodesToAnimate = [];
+  currentNode = this.getNode(this.getNode(this.target).previousNode);
+  while (currentNode.id !== this.start) {
+    currentNodesToAnimate.unshift(currentNode);
+    currentNode = this.getNode(currentNode.previousNode.id);
+  }
+
+  timeout(0);
+
+  function timeout(currentIndex) {
+    if (!currentNodesToAnimate.length)
+      currentNodesToAnimate.push(this.getNode(this.start));
+    setTimeout(function () {
+      if (currentIndex === 0) {
+        shortestPathChange(currentNodesToAnimate[currentIndex]);
+      } else if (currentIndex < currentNodesToAnimate.length) {
+        shortestPathChange(
+          currentNodesToAnimate[currentIndex],
+          currentNodesToAnimate[currentIndex - 1]
+        );
+      } else if (currentIndex === currentNodesToAnimate.length) {
+        shortestPathChange(
+          this.nodes[this.target],
+          currentNodesToAnimate[currentIndex - 1],
+          `target`
+        );
+      }
+      if (currentIndex > currentNodesToAnimate.length) {
+        board.toggleButtons();
+        return;
+      }
+      timeout(currentIndex + 1);
+    }, 40);
+  }
+
+  function shortestPathChange(currentNode, previousNode, istarget) {
+    if (currentNode.id !== this.start) {
+      if (
+        currentNode.id !== board.target ||
+        (currentNode.id === board.target && istarget)
+      ) {
+        let currentNodeElement = document.getElementById(currentNode.id);
+        if (type === `unweighted`) {
+          currentNodeElement.className = `shortest-path-unweighted`;
+        } else {
+          let direction = `direction`;
+          if (currentNode[direction] === `up`) {
+            currentNodeElement.className = `shortest-path-up`;
+          } else if (currentNode[direction] === `down`) {
+            currentNodeElement.className = `shortest-path-down`;
+          } else if (currentNode[direction] === `right`) {
+            currentNodeElement.className = `shortest-path-right`;
+          } else if (currentNode[direction] === `left`) {
+            currentNodeElement.className = `shortest-path-left`;
+          } else {
+            currentNodeElement.className = `shortest-path`;
+          }
+        }
+      }
+    }
+    if (previousNode) {
+      if (previousNode.id !== this.target && previousNode.id !== this.start) {
+        let previousNodeElement = document.getElementById(previousNode.id);
+        previousNodeElement.className =
+          previousNode.weight === 15 ? `shortest-path weight` : `shortest-path`;
+      }
+    } else {
+      let element = document.getElementById(this.start);
+      element.className = `startTransparent`;
+    }
+  }
+};
 // ---------------FUNCTION FOR PROVIDING TEXT FOR TUTORIAL-------------
 
 let counter = 0;
@@ -433,8 +527,10 @@ Board.prototype.restOfListeners = function () {
       }
 
       if (this.algo === `astar`) {
+        this.toggleButtons();
         weightedAlgorithms(this, this.algo);
         launchAnimations(this);
+        this.toggleButtons();
       } else if (this.algo === `dijkstra`) {
         weightedAlgorithms(this, this.algo);
         launchAnimations(this);
@@ -550,17 +646,13 @@ window.addEventListener(`keydown`, (e) => {
   }
 });
 //tasks for js
-//write algos
+
 //write launch animations and launch instant animations
-//write draw and animate shortest path
 //write clearboard , clear walls and weights , clear path
 //redo algos
 //change special nodes
 //stop weights for unweighted algos , write a function for that
-//stop changing visited nodes to blank (they either become wall or weight)
-//function for checking for weights before doing unweighted algos
 //clearboard - should i just do this = new Board
 //tasks for css
 //rest of animations
-//how to make dropdown close is mouse up good?
 export default board.getNode;
