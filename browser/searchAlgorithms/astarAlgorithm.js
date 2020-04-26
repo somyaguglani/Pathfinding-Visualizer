@@ -2,7 +2,7 @@
 // It consists of g-cost which is the distance from start node and h-cost which is the distance from target
 //f-cost = g-cost + h-cost.
 
-//A* is called with the help of bidirectional.js file
+//Since A* is a weighted algorithm along with dijkstra's algorithm and greedy best first search they get called from weightedAlgorithms.js
 
 //---------------------FUNCTION FOR A* ALGORITHM------------------------
 
