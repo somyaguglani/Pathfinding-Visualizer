@@ -6,6 +6,7 @@ import horizontalSkew from "../browser/mazeAlgorithms/horizontalSkewMaze.js";
 import stairMaze from "../browser/mazeAlgorithms/stairMaze.js";
 import unweightedAlgorithms from "../browser/searchAlgorithms/unweightedAlgorithms.js";
 import launchAnimations from "../browser/animations/launchAnimations.js";
+import astarAlgorithm from "../browser/searchAlgorithms/astarAlgorithm.js";
 const gridContainer = document.querySelector(`.grid`);
 const navbarContainer = document.querySelector(`.navbarContainer`);
 let navHeight = navbarContainer.offsetHeight;
@@ -432,6 +433,8 @@ Board.prototype.restOfListeners = function () {
       }
 
       if (this.algo === `astar`) {
+        astarAlgorithm(this, `ok`);
+        launchAnimations(this);
       } else if (this.algo === `dijkstra`) {
       } else if (this.algo === `bestfirst`) {
       } else if (this.algo === `breadthfirst`) {

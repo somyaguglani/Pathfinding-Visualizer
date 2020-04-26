@@ -3,11 +3,10 @@ const launchAnimations = (board) => {
   console.log(`launch animations`);
   for (let currIndex = 0; currIndex < nodesToAnimate.length; currIndex++) {
     const currentNode = nodesToAnimate[currIndex];
-    // console.log(currentNode);
-    currentNode.status = `visited`;
+
     const currentNodeElement = document.getElementById(currentNode.id);
     // console.log(currentNodeElement);
-    currentNodeElement.className = `visited`;
+    currentNodeElement.className = currentNode.status;
   }
 };
 export default launchAnimations;
