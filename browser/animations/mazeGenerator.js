@@ -2,9 +2,9 @@
 
 const mazeGenerator = (board) => {
   let speed = 0;
-  if (board.speed === `fast`) speed = 15;
-  else if (board.speed === `average`) speed = 35;
-  else if (board.speed === `slow`) speed = 85;
+  if (board.speed === `fast`) speed = 5;
+  else if (board.speed === `average`) speed = 25;
+  else if (board.speed === `slow`) speed = 75;
 
   for (
     let currIndex = 0;

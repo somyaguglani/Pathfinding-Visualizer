@@ -91,3 +91,5 @@ const drawShortestPathTimeout = (board, type) => {
     }
   }
 };
+
+export default drawShortestPathTimeout;

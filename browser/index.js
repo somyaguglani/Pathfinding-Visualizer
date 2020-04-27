@@ -7,6 +7,7 @@ import stairMaze from "../browser/mazeAlgorithms/stairMaze.js";
 import unweightedAlgorithms from "../browser/searchAlgorithms/unweightedAlgorithms.js";
 import launchAnimations from "../browser/animations/launchAnimations.js";
 import weightedAlgorithms from "../browser/searchAlgorithms/weightedAlgorithms.js";
+import launchInstantAnimations from "../browser/animations/launchInstantAnimations.js";
 const gridContainer = document.querySelector(`.grid`);
 const navbarContainer = document.querySelector(`.navbarContainer`);
 let navHeight = navbarContainer.offsetHeight;
@@ -181,7 +182,7 @@ Board.prototype.changeSpecialNode = function (currentNode, currentNodeElement) {
     currentNodeElement.className = this.previouslyPressedNodeStatus;
     currentNode.status = this.previouslyPressedNodeStatus;
   }
-}; //do
+};
 
 // --------------FUNCTION FOR DEALING WITH WALLS AND WEIGHTS------------
 
@@ -212,6 +213,38 @@ Board.prototype.changeNormalNode = function (currNode, currNodeElement) {
 Board.prototype.getNode = function (id) {
   const [i, j] = id.split(`-`);
   return this.allNodesArray[i][j];
+};
+
+// ----------------------FUNCTION FOR REDOING AN ALGORITHM---------------------
+
+Board.prototype.redoAlgo = function () {
+  this.clearPath();
+  this.instantAlgorithm();
+};
+
+// ---------------FUNCTION FOR RUNNING AN ALGORITHM INSTANTLY----------------------------
+
+Board.prototype.instantAlgorithm = function () {
+  let success;
+  if (this.algo === `astar`) {
+    success = weightedAlgorithms(this, this.algo);
+    launchInstantAnimations(this, success, `weighted`);
+  } else if (this.algo === `dijkstra`) {
+    success = weightedAlgorithms(this, this.algo);
+    launchInstantAnimations(this, success, `weighted`);
+  } else if (this.algo === `bestfirst`) {
+    success = weightedAlgorithms(this, this.algo);
+    launchInstantAnimations(this, success, `weighted`);
+  } else if (this.algo === `breadthfirst`) {
+    this.clearWeights();
+    success = unweightedAlgorithms(this, this.algo);
+    launchInstantAnimations(this, success, `unweighted`);
+  } else if (this.algo === `depthfirst`) {
+    this.clearWeights();
+    success = unweightedAlgorithms(this, this.algo);
+    launchInstantAnimations(this, success, `unweighted`);
+  }
+  this.algoComplete = true;
 };
 
 // -----------------------FUNCTIONS FOR CLEARING WALLS AND WEIGHTS AND SETTING THE BOARD TO IT'S INITIAL STATE---------------
@@ -300,6 +333,12 @@ Board.prototype.clearPath = function () {
       }
     }
   }
+};
+
+Board.prototype.reset = function () {
+  this.getNode(this.start).status = `start`;
+  document.getElementById(this.start).className = `startTransparent`;
+  this.getNode(this.target).status = `target`;
 };
 
 // ---------------FUNCTION FOR PROVIDING TEXT FOR TUTORIAL-------------
@@ -419,7 +458,7 @@ Board.prototype.contentInitialize = function () {
         </p>
         <div class="pageCounter">7/7</div>
         <img class = "responsive-img" src="./styling/imagesAndSvg/navbar.png" alt="algoDemo">
-        <h2>Now it's time to play around with the visualizer. I hope you have as much fun as i had building it. Enjoy!</h2>
+        <h2>Now that you know everything, it's time to play around with the visualizer. Enjoy!</h2>
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
@@ -552,20 +591,25 @@ Board.prototype.restOfListeners = function () {
       }
       this.clearPath();
       this.toggleButtons();
+      let success;
       if (this.algo === `astar`) {
-        weightedAlgorithms(this, this.algo);
+        success = weightedAlgorithms(this, this.algo);
+        launchAnimations(this, success, `weighted`);
       } else if (this.algo === `dijkstra`) {
-        weightedAlgorithms(this, this.algo);
+        success = weightedAlgorithms(this, this.algo);
+        launchAnimations(this, success, `weighted`);
       } else if (this.algo === `bestfirst`) {
-        weightedAlgorithms(this, this.algo);
+        success = weightedAlgorithms(this, this.algo);
+        launchAnimations(this, success, `weighted`);
       } else if (this.algo === `breadthfirst`) {
         this.clearWeights();
-        unweightedAlgorithms(this, this.algo);
+        success = unweightedAlgorithms(this, this.algo);
+        launchAnimations(this, success, `unweighted`);
       } else if (this.algo === `depthfirst`) {
         this.clearWeights();
-        unweightedAlgorithms(this, this.algo);
+        success = unweightedAlgorithms(this, this.algo);
+        launchAnimations(this, success, `unweighted`);
       }
-      launchAnimations(this);
       this.algoComplete = true;
     }
   });
@@ -745,11 +789,4 @@ window.addEventListener(`keydown`, (e) => {
 });
 //tasks for js
 //write launch animations and launch instant animations
-//write clearboard , clear walls and weights , clear path
-//redo algos
-//change special nodes
-//stop weights for unweighted algos , write a function for that
-//clearboard - should i just do this = new Board
-//tasks for css
-//rest of animations
 export default board.getNode;
