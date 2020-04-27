@@ -28,11 +28,14 @@ function Board(width, height) {
   this.allNodesArray = [];
   this.nodesToAnimate = [];
   this.tutorialContentArray = [];
-  this.pressedStatus = `normal`;
+  this.pressedNodeStatus = `normal`;
   this.mouseDown = false;
   this.keyDown = false;
   this.buttonsActivated = false;
   this.shortestPathNodesToAnimate = [];
+  this.previouslyPressedNodeStatus = null;
+  this.previouslySwitchedNode = null;
+  this.previouslySwitchedNodeWeight = 0;
 }
 
 // --------------------FUNCTION FOR INITIALIZING BOARD AREA----------------
@@ -99,9 +102,9 @@ Board.prototype.addEventListeners = function () {
             currentNode.status === `start` ||
             currentNode.status === `target`
           ) {
-            this.pressedStatus = currentNode.status;
+            this.pressedNodeStatus = currentNode.status;
           } else {
-            this.pressedStatus = `normal`;
+            this.pressedNodeStatus = `normal`;
             this.changeNormalNode(currentNode, currentNodeElement);
           }
         }
@@ -110,20 +113,21 @@ Board.prototype.addEventListeners = function () {
       currentNodeElement.addEventListener(`mouseup`, (e) => {
         if (this.buttonsActivated) {
           this.mouseDown = false;
-          if (this.pressedStatus === `target`) this.target = currentNodeId;
-          else if (this.pressedStatus === `start`) this.start = currentNodeId;
-          this.pressedStatus = `normal`;
+          if (this.pressedNodeStatus === `target`) this.target = currentNodeId;
+          else if (this.pressedNodeStatus === `start`)
+            this.start = currentNodeId;
+          this.pressedNodeStatus = `normal`;
         }
       });
 
       currentNodeElement.addEventListener(`mouseenter`, (e) => {
         if (this.buttonsActivated) {
-          if (this.mouseDown && this.pressedStatus !== `normal`) {
+          if (this.mouseDown && this.pressedNodeStatus !== `normal`) {
             this.changeSpecialNode(currentNode, currentNodeElement);
-            if (this.pressedStatus === `target`) {
+            if (this.pressedNodeStatus === `target`) {
               this.target = currentNodeId;
               if (this.algoComplete) this.redoAlgo();
-            } else if (this.pressedStatus === `start`) {
+            } else if (this.pressedNodeStatus === `start`) {
               this.start = currentNodeId;
               if (this.algoComplete) this.redoAlgo();
             }
@@ -135,7 +139,7 @@ Board.prototype.addEventListeners = function () {
 
       currentNodeElement.addEventListener(`mouseleave`, (e) => {
         if (this.buttonsActivated) {
-          if (this.mouseDown && this.pressedStatus !== `normal`) {
+          if (this.mouseDown && this.pressedNodeStatus !== `normal`) {
             this.changeSpecialNode(currentNode, currentNodeElement);
           }
         }
@@ -146,10 +150,38 @@ Board.prototype.addEventListeners = function () {
 
 // --------------FUNCTION FOR DEALING WITH START AND TARGET NODES------------
 
-Board.prototype.changeSpecialNode = function (
-  currentNode,
-  currentNodeElement
-) {}; //do
+Board.prototype.changeSpecialNode = function (currentNode, currentNodeElement) {
+  let previousElement;
+  if (this.previouslySwitchedNode)
+    previousElement = document.getElementById(this.previouslySwitchedNode.id);
+  if (currentNode.status !== `target` && currentNode.status !== `start`) {
+    if (this.previouslySwitchedNode) {
+      this.previouslySwitchedNode.status = this.previouslyPressedNodeStatus;
+      previousElement.className =
+        this.previouslySwitchedNodeWeight === 15
+          ? `unvisited weight`
+          : this.previouslyPressedNodeStatus;
+      this.previouslySwitchedNode.weight =
+        this.previouslySwitchedNodeWeight === 15 ? 15 : 0;
+      this.previouslySwitchedNode = null;
+      this.previouslySwitchedNodeWeight = currentNode.weight;
+      this.previouslyPressedNodeStatus = currentNode.status;
+      currentNodeElement.className = this.pressedNodeStatus;
+      currentNode.status = this.pressedNodeStatus;
+      currentNode.weight = 0;
+    }
+  } else if (
+    currentNode.status !== this.pressedNodeStatus &&
+    !this.algoComplete
+  ) {
+    this.previouslySwitchedNode.status = this.pressedNodeStatus;
+    previousElement.className = this.pressedNodeStatus;
+  } else if (currentNode.status === this.pressedNodeStatus) {
+    this.previouslySwitchedNode = currentNode;
+    currentNodeElement.className = this.previouslyPressedNodeStatus;
+    currentNode.status = this.previouslyPressedNodeStatus;
+  }
+}; //do
 
 // --------------FUNCTION FOR DEALING WITH WALLS AND WEIGHTS------------
 
@@ -192,8 +224,8 @@ Board.prototype.clearWallsAndWeights = function () {
     for (let col = 0; col < this.width; col++) {
       const currentNode = this.allNodesArray[row][col];
       if (currentNode.status === `wall` || currentNode.weight === 15) {
-        currentNodeElement = document.getElementById(`${row}-${col}`);
-        currNodeElement.className = `unvisited`;
+        let currentNodeElement = document.getElementById(`${row}-${col}`);
+        currentNodeElement.className = `unvisited`;
         currentNode.status = `unvisited`;
         currentNode.weight = 0;
       }
@@ -208,8 +240,8 @@ Board.prototype.clearWeights = function () {
     for (let col = 0; col < this.width; col++) {
       const currentNode = this.allNodesArray[row][col];
       if (currentNode.weight === 15) {
-        currentNodeElement = document.getElementById(`${row}-${col}`);
-        currNodeElement.className = `unvisited`;
+        let currentNodeElement = document.getElementById(`${row}-${col}`);
+        currentNodeElement.className = `unvisited`;
         currentNode.status = `unvisited`;
         currentNode.weight = 0;
       }
@@ -223,7 +255,7 @@ Board.prototype.clearStatus = function () {
   const specialStatus = [`wall`, `start`, `target`];
   for (let row = 0; row < this.height; row++) {
     for (let col = 0; col < this.width; col++) {
-      const currentNode = this.getNode(`${row}-${col}`);
+      const currentNode = this.allNodesArray[row][col];
       currentNode.previousNode = null;
       currentNode.direction = null;
       currentNode.distance = Infinity;
@@ -242,10 +274,10 @@ Board.prototype.clearPath = function () {
   let startNode = this.getNode(this.start);
   let targetNode = this.getNode(this.target);
   startNode.status = `start`;
-  startNodeElement = document.getElementById(this.start);
+  let startNodeElement = document.getElementById(this.start);
   startNodeElement.className = `start`;
   targetNode.status = `target`;
-  targetNodeElement = document.getElementById(this.target);
+  let targetNodeElement = document.getElementById(this.target);
   targetNodeElement.className = `target`;
   this.algoComplete = false;
   const specialStatus = [`wall`, `start`, `target`];
@@ -485,6 +517,10 @@ Board.prototype.restOfListeners = function () {
   const algoOptions = document.querySelectorAll(`.algoOptions`);
   const mazes = document.querySelectorAll(`.maze`);
   const speeds = document.querySelectorAll(`.speeds`);
+  const clearBoard = document.getElementById(`clearBoard`);
+  const clearWallsAndWeights = document.getElementById(`clearWallsAndWeights`);
+  const clearPath = document.getElementById(`clearPath`);
+  console.log(clearBoard, clearWallsAndWeights, clearPath);
 
   logo.addEventListener(`click`, (e) => {
     e.preventDefault();
@@ -493,7 +529,6 @@ Board.prototype.restOfListeners = function () {
 
   dropDowns.forEach((linkButton) => {
     linkButton.addEventListener(`click`, (e) => {
-      // change this
       dropDowns.forEach((dropdown) => {
         if (dropdown !== e.currentTarget) {
           dropdown.classList.remove(`displayDropdown`);
@@ -508,51 +543,56 @@ Board.prototype.restOfListeners = function () {
     });
   });
 
-  //add connections
+  //add connections , only launch animations should change and add success vairables
   visualizeButton.addEventListener(`click`, (e) => {
     if (this.buttonsActivated) {
-      console.log(`algos are changing`);
       if (this.algo.length === 0) {
         e.currentTarget.innerHTML = `Pick an Algorithm!`;
         return;
       }
-
+      this.clearPath();
+      this.toggleButtons();
       if (this.algo === `astar`) {
-        this.toggleButtons();
         weightedAlgorithms(this, this.algo);
-        launchAnimations(this);
-        this.toggleButtons();
       } else if (this.algo === `dijkstra`) {
         weightedAlgorithms(this, this.algo);
-        launchAnimations(this);
       } else if (this.algo === `bestfirst`) {
         weightedAlgorithms(this, this.algo);
-        launchAnimations(this);
       } else if (this.algo === `breadthfirst`) {
+        this.clearWeights();
+        unweightedAlgorithms(this, this.algo);
       } else if (this.algo === `depthfirst`) {
+        this.clearWeights();
+        unweightedAlgorithms(this, this.algo);
       }
+      launchAnimations(this);
+      this.algoComplete = true;
     }
   });
 
   algoOptions.forEach((algo) => {
     algo.addEventListener(`click`, (e) => {
       if (this.buttonsActivated) {
-        console.log(`algo content is changing`);
-
         this.algo = e.currentTarget.id;
+        const weightCancellable = document.querySelector(`.cancelable`);
         if (this.algo === `astar`) {
+          weightCancellable.classList.remove(`cancelNow`);
           visualizeButton.innerHTML = `Visualize A* !`;
           algoDescription.innerHTML = `A* Search is <strong>weighted</strong> and <strong>guarantees</strong> the shortest path!`;
         } else if (this.algo === `dijkstra`) {
+          weightCancellable.classList.remove(`cancelNow`);
           visualizeButton.innerHTML = `Visualize Dijkstra's !`;
           algoDescription.innerHTML = `Dijkstra's Algorithm is <strong>weighted</strong> and <strong>guarantees</strong> the shortest path!`;
         } else if (this.algo === `bestfirst`) {
+          weightCancellable.classList.remove(`cancelNow`);
           visualizeButton.innerHTML = `Visualize Greedy !`;
           algoDescription.innerHTML = `Greedy Best-first Search is <strong>weighted</strong> and <strong>does not guarantee</strong> the shortest path!`;
         } else if (this.algo === `breadthfirst`) {
+          weightCancellable.classList.add(`cancelNow`);
           visualizeButton.innerHTML = `Visualize BFS !`;
           algoDescription.innerHTML = `Breadth-first Search is <strong>unweighted</strong> and <strong>guarantees</strong> the shortest path!`;
         } else if (this.algo === `depthfirst`) {
+          weightCancellable.classList.add(`cancelNow`);
           visualizeButton.innerHTML = `Visualize DFS !`;
           algoDescription.innerHTML = `Depth-first Search is <strong>unweighted</strong> and <strong>does not guarantee</strong> the shortest path!`;
         }
@@ -560,13 +600,11 @@ Board.prototype.restOfListeners = function () {
     });
   });
 
-  //add connections
   mazes.forEach((maze) => {
     maze.addEventListener(`click`, (e) => {
       if (this.buttonsActivated) {
-        console.log(`maze is generating`);
         const currentMaze = e.currentTarget.id;
-        //run clear walls and weights and path function here
+        this.clearWallsAndWeights();
         this.toggleButtons();
         if (currentMaze === `verticalskew`) {
           console.log(`verticalskew`);
@@ -605,6 +643,75 @@ Board.prototype.restOfListeners = function () {
         }
       }
     });
+  });
+
+  clearBoard.addEventListener(`click`, (e) => {
+    if (this.buttonsActivated) {
+      //complete this-> if anything is added to board put it here too
+      let contentHeight = mainContentContainer.offsetHeight;
+      let docHeight = document.documentElement.scrollHeight;
+      let docWidth = document.documentElement.scrollWidth;
+      let height = Math.floor((docHeight - contentHeight - navHeight) / 24);
+      let width = Math.floor(docWidth / 23);
+      let start =
+        Math.floor(height / 2).toString() +
+        `-` +
+        Math.floor(width / 4).toString();
+      let target =
+        Math.floor(height / 2).toString() +
+        `-` +
+        Math.floor((3 * width) / 4).toString();
+
+      for (let row = 0; row < this.height; row++) {
+        for (let col = 0; col < this.width; col++) {
+          let currentNode = board.allNodesArray[row][col];
+          let currentNodeElement = document.getElementById(`${row}-${col}`);
+          if (`${row}-${col}` === start) {
+            currentNodeElement.className = `start`;
+            currentNode.status = `start`;
+          } else if (`${row}-${col}` === target) {
+            currentNodeElement.className = `target`;
+            currentNode.status = `target`;
+          } else {
+            currentNodeElement.className = `unvisited`;
+            currentNode.status = `unvisited`;
+          }
+
+          this.weight = 0;
+          this.previousNode = null;
+          this.direction = null;
+          this.distance = Infinity;
+          this.totalDistance = Infinity;
+          this.heuristicDistance = null;
+          this.path = null;
+          this.direction = null;
+        }
+      }
+      this.wallsAnimationArray = [];
+      this.algoComplete = false;
+      this.start = start;
+      this.target = target;
+      this.nodesToAnimate = [];
+      this.pressedNodeStatus = `normal`;
+      this.mouseDown = false;
+      this.keyDown = false;
+      this.shortestPathNodesToAnimate = [];
+      this.previouslyPressedNodeStatus = null;
+      this.previouslySwitchedNode = null;
+      this.previouslySwitchedNodeWeight = 0;
+    }
+  });
+
+  clearWallsAndWeights.addEventListener(`click`, (e) => {
+    if (this.buttonsActivated) {
+      this.clearWallsAndWeights();
+    }
+  });
+
+  clearPath.addEventListener(`click`, (e) => {
+    if (this.buttonsActivated) {
+      this.clearPath();
+    }
   });
 
   speeds.forEach((speed) => {

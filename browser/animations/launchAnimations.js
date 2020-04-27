@@ -8,5 +8,6 @@ const launchAnimations = (board) => {
     // console.log(currentNodeElement);
     currentNodeElement.className = currentNode.status;
   }
+  board.toggleButtons();
 };
 export default launchAnimations;
