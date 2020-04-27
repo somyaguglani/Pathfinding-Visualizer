@@ -1,4 +1,6 @@
-import drawShortestPathTimeout from "../animations/shortestPathAnimation.js";
+import { drawShortestPathTimeout } from "../animations/shortestPathAnimation.js";
+
+// ------------------FUNCTION FOR LAUNCHING ANIMATIONS--------------------
 
 const launchAnimations = (board, success, type) => {
   let nodesToAnimate = [...board.nodesToAnimate];

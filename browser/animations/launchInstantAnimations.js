@@ -1,4 +1,6 @@
-import addShortestPath from "../animations/shortestPathAnimation.js";
+import { addShortestPath } from "../animations/shortestPathAnimation.js";
+
+// ----------------FUNCTION FOR LAUNCHING INSTANT ANIMATIONS------------------
 
 const launchInstantAnimations = (board, success, type) => {
   let nodesToAnimate = [...board.nodesToAnimate];

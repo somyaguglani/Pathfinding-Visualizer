@@ -50,17 +50,19 @@ const verticalSkewMaze = (
     let columnRandom = possibleCols[randomCI];
     for (let row = 0; row < board.height; row++) {
       for (let col = 0; col < board.width; col++) {
-        const currNode = board.getNode(`${row}-${col}`);
-        if (!specialNodes.includes(currNode.status)) {
-          if (
-            row === currentRow &&
-            col !== columnRandom &&
-            col >= colsi - 1 &&
-            col <= colei + 1
-          ) {
-            const currElement = document.getElementById(`${row}-${col}`);
-            board.wallsAnimationArray.push(currElement);
-            currNode.status = `wall`;
+        if ((row + col) * Math.random() < 40) {
+          const currNode = board.getNode(`${row}-${col}`);
+          if (!specialNodes.includes(currNode.status)) {
+            if (
+              row === currentRow &&
+              col !== columnRandom &&
+              col >= colsi - 1 &&
+              col <= colei + 1
+            ) {
+              const currElement = document.getElementById(`${row}-${col}`);
+              board.wallsAnimationArray.push(currElement);
+              currNode.status = `wall`;
+            }
           }
         }
       }
@@ -125,17 +127,22 @@ const verticalSkewMaze = (
     let rowRandom = possibleCols[randomRI];
     for (let row = 0; row < board.height; row++) {
       for (let col = 0; col < board.width; col++) {
-        const currNode = board.getNode(`${row}-${col}`);
-        if (!specialNodes.includes(currNode.status)) {
-          if (
-            col === currentCol &&
-            row !== rowRandom &&
-            row >= rowsi - 1 &&
-            row <= rowei + 1
-          ) {
-            const currElement = document.getElementById(`${row}-${col}`);
-            board.wallsAnimationArray.push(currElement);
-            currNode.status = `wall`;
+        if (
+          (row + (col % 50)) * Math.random() < 22 &&
+          ((row % 15) + col) * Math.random() < 22
+        ) {
+          const currNode = board.getNode(`${row}-${col}`);
+          if (!specialNodes.includes(currNode.status)) {
+            if (
+              col === currentCol &&
+              row !== rowRandom &&
+              row >= rowsi - 1 &&
+              row <= rowei + 1
+            ) {
+              const currElement = document.getElementById(`${row}-${col}`);
+              board.wallsAnimationArray.push(currElement);
+              currNode.status = `wall`;
+            }
           }
         }
       }
