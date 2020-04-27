@@ -4,11 +4,11 @@ const addShortestPath = (board, type) => {
   let currentNode;
   currentNode = board.getNode(board.getNode(board.target).previousNode);
   while (currentNode.id !== board.start) {
-    baord.shortestPathNodesToAnimate.unshift(currentNode);
+    board.shortestPathNodesToAnimate.unshift(currentNode);
     if (type === `draw`) {
       document.getElementById(currentNode.id).className = `shortest-path`;
     }
-    currentNode = board.getNode(currentNode.previousNode.id);
+    currentNode = board.getNode(currentNode.previousNode);
   }
 };
 
@@ -20,10 +20,8 @@ const drawShortestPathTimeout = (board, type) => {
   currentNode = board.getNode(board.getNode(board.target).previousNode);
   while (currentNode.id !== board.start) {
     currentNodesToAnimate.unshift(currentNode);
-    currentNode = board.getNode(currentNode.previousNode.id);
+    currentNode = board.getNode(currentNode.previousNode);
   }
-
-  timeout(0);
 
   const timeout = (currentIndex) => {
     if (!currentNodesToAnimate.length) {
@@ -88,6 +86,7 @@ const drawShortestPathTimeout = (board, type) => {
       element.className = `startTransparent`;
     }
   }
+  timeout(0);
 };
 
 export { addShortestPath, drawShortestPathTimeout };

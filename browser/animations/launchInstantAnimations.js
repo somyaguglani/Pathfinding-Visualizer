@@ -3,30 +3,6 @@ import { addShortestPath } from "../animations/shortestPathAnimation.js";
 // ----------------FUNCTION FOR LAUNCHING INSTANT ANIMATIONS------------------
 
 const launchInstantAnimations = (board, success, type) => {
-  let nodesToAnimate = [...board.nodesToAnimate];
-  let shortestPathNodes;
-  for (let currIndex = 0; currIndex < nodesToAnimate.length; currIndex++) {
-    if (currIndex === 0) change(nodesToAnimate[currIndex]);
-    else change(nodesToAnimate[currIndex], nodesToAnimate[currIndex - 1]);
-  }
-  board.nodesToAnimate = [];
-  if (success) {
-    addShortestPath(board, `draw`);
-    shortestPathNodes = board.shortestPathNodesToAnimate;
-  } else {
-    board.reset();
-    return;
-  }
-
-  let i;
-  for (i = 0; i < shortestPathNodes.length; i++) {
-    if (i === 0) shortestPathChange(shortestPathNodes[i]);
-    else shortestPathChange(shortestPathNodes[i], shortestPathNodes[i - 1]);
-  }
-  board.reset();
-  shortestPathChange(board.getNode(board.target), shortestPathNodes[i - 1]);
-  board.shortestPathNodesToAnimate = [];
-
   const change = (currentNode, previousNode) => {
     let currentNodeElement = document.getElementById(currentNode.id);
     const specialClasses = [
@@ -36,6 +12,7 @@ const launchInstantAnimations = (board, success, type) => {
       `instantshortest-path weight`,
     ];
     if (previousNode) {
+      console.log(previousNode.id);
       let previousNodeElement = document.getElementById(previousNode.id);
       if (!specialClasses.includes(previousNodeElement.className)) {
         previousNodeElement.className =
@@ -73,6 +50,30 @@ const launchInstantAnimations = (board, success, type) => {
       element.className = `startTransparent`;
     }
   };
+
+  let nodesToAnimate = [...board.nodesToAnimate];
+  let shortestPathNodes;
+  for (let currIndex = 0; currIndex < nodesToAnimate.length; currIndex++) {
+    if (currIndex === 0) change(nodesToAnimate[currIndex]);
+    else change(nodesToAnimate[currIndex], nodesToAnimate[currIndex - 1]);
+  }
+  board.nodesToAnimate = [];
+  if (success) {
+    addShortestPath(board, `draw`);
+    shortestPathNodes = board.shortestPathNodesToAnimate;
+  } else {
+    board.reset();
+    return;
+  }
+
+  let i;
+  for (i = 0; i < shortestPathNodes.length; i++) {
+    if (i === 0) shortestPathChange(shortestPathNodes[i]);
+    else shortestPathChange(shortestPathNodes[i], shortestPathNodes[i - 1]);
+  }
+  board.reset();
+  shortestPathChange(board.getNode(board.target), shortestPathNodes[i - 1]);
+  board.shortestPathNodesToAnimate = [];
 };
 
 export default launchInstantAnimations;

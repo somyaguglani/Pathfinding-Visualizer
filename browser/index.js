@@ -547,8 +547,6 @@ Board.prototype.toggleButtons = function () {
 // ------------FUNCTION FOR ATTACHING LISTENERS FOR REST OF THE BUTTONS------------
 
 Board.prototype.restOfListeners = function () {
-  //complete this
-
   const logo = document.querySelector(`.refreshLogo`);
   const dropDowns = document.querySelectorAll(`.dropDown`);
   const visualizeButton = document.querySelector(`.visualizeButton`);
@@ -559,7 +557,6 @@ Board.prototype.restOfListeners = function () {
   const clearBoard = document.getElementById(`clearBoard`);
   const clearWallsAndWeights = document.getElementById(`clearWallsAndWeights`);
   const clearPath = document.getElementById(`clearPath`);
-  console.log(clearBoard, clearWallsAndWeights, clearPath);
 
   logo.addEventListener(`click`, (e) => {
     e.preventDefault();
@@ -582,7 +579,6 @@ Board.prototype.restOfListeners = function () {
     });
   });
 
-  //add connections , only launch animations should change and add success vairables
   visualizeButton.addEventListener(`click`, (e) => {
     if (this.buttonsActivated) {
       if (this.algo.length === 0) {
@@ -651,7 +647,6 @@ Board.prototype.restOfListeners = function () {
         this.clearWallsAndWeights();
         this.toggleButtons();
         if (currentMaze === `verticalskew`) {
-          console.log(`verticalskew`);
           verticalSkew(
             this,
             2,
@@ -663,7 +658,6 @@ Board.prototype.restOfListeners = function () {
           );
           mazeGenerator(this);
         } else if (currentMaze === `horizontalskew`) {
-          console.log(`horizontalskew`);
           horizontalSkew(
             this,
             2,
@@ -675,13 +669,10 @@ Board.prototype.restOfListeners = function () {
           );
           mazeGenerator(this);
         } else if (currentMaze === `randomwall`) {
-          console.log(`randomwall`);
           randomMaze(this, `wall`);
         } else if (currentMaze === `randomweight`) {
-          console.log(`randomweight`);
           randomMaze(this, `weight`);
         } else if (currentMaze === `stair`) {
-          console.log(`stair`);
           stairMaze(this);
           mazeGenerator(this);
         }
@@ -691,7 +682,6 @@ Board.prototype.restOfListeners = function () {
 
   clearBoard.addEventListener(`click`, (e) => {
     if (this.buttonsActivated) {
-      //complete this-> if anything is added to board put it here too
       let contentHeight = mainContentContainer.offsetHeight;
       let docHeight = document.documentElement.scrollHeight;
       let docWidth = document.documentElement.scrollWidth;
@@ -761,7 +751,6 @@ Board.prototype.restOfListeners = function () {
   speeds.forEach((speed) => {
     speed.addEventListener(`click`, (e) => {
       if (this.buttonsActivated) {
-        console.log(`speed is changing`);
         this.speed = e.currentTarget.id;
       }
     });
@@ -787,6 +776,4 @@ window.addEventListener(`keydown`, (e) => {
     board.keyDown = e.keyCode;
   }
 });
-//tasks for js
-//write launch animations and launch instant animations
 export default board.getNode;
