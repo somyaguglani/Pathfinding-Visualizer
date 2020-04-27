@@ -1,4 +1,11 @@
+//Greedy best first search is also based on precumputations but unlike A* the f-cost = h-cost which is the distance from target nodes so A* is better
+
+//Dijkstra's Algorithm assumes that all nodes other than source are at Infinity and so finds the path to target by always updating the neighbours.
+
 import astarAlgorithm from "../searchAlgorithms/astarAlgorithm.js";
+
+// -----------------------FUNCTION FOR WEIGHTED ALGORITHMS----------------------
+
 const weightedAlgorithms = (board, type) => {
   if (type === `astar`) return astarAlgorithm(board);
 
@@ -40,6 +47,8 @@ const weightedAlgorithms = (board, type) => {
   }
 };
 
+// --------------------FUNCTION FOR FINDING THE CLOSEST NODE--------------------
+
 const closestNode = (board, unvisitedNodes) => {
   let currentClosest, index;
   for (let currIndex = 0; currIndex < unvisitedNodes.length; currIndex++) {
@@ -55,6 +64,9 @@ const closestNode = (board, unvisitedNodes) => {
   unvisitedNodes.splice(index, 1);
   return currentClosest;
 };
+
+// ------------------FUNCTION FOR UPDATING NEIGHBOURS  AND NODES-----------------
+
 const updateNeighbors = (board, currentNode, type) => {
   let neighbours = getNeighbors(currentNode.id, board);
   for (let neighbour of neighbours) {
@@ -70,6 +82,27 @@ const updateNeighbors = (board, currentNode, type) => {
     }
   }
 };
+
+function updateNode(currentNode, targetNode, actualTargetNode, type) {
+  let distance = getDistance(currentNode, targetNode);
+  let distanceToCompare;
+  if (actualTargetNode && type === `bestfirst`) {
+    distanceToCompare =
+      targetNode.weight +
+      distance[0] +
+      manhattanDistance(targetNode, actualTargetNode);
+  } else {
+    distanceToCompare = currentNode.distance + targetNode.weight + distance[0];
+  }
+  if (distanceToCompare < targetNode.distance) {
+    targetNode.distance = distanceToCompare;
+    targetNode.previousNode = currentNode.id;
+    targetNode.path = distance[1];
+    targetNode.direction = distance[2];
+  }
+}
+
+// ------------------FUNCTION FOR EXPLORING ALL FOUR NEIGHBOURS OF A NODE-------------------
 
 const getNeighbors = (id, board) => {
   let coordinates = id.split(`-`);
@@ -104,24 +137,7 @@ const getNeighbors = (id, board) => {
   return neighbors;
 };
 
-function updateNode(currentNode, targetNode, actualTargetNode, type) {
-  let distance = getDistance(currentNode, targetNode);
-  let distanceToCompare;
-  if (actualTargetNode && type === `bestfirst`) {
-    distanceToCompare =
-      targetNode.weight +
-      distance[0] +
-      manhattanDistance(targetNode, actualTargetNode);
-  } else {
-    distanceToCompare = currentNode.distance + targetNode.weight + distance[0];
-  }
-  if (distanceToCompare < targetNode.distance) {
-    targetNode.distance = distanceToCompare;
-    targetNode.previousNode = currentNode.id;
-    targetNode.path = distance[1];
-    targetNode.direction = distance[2];
-  }
-}
+// ------------------FUNCTION FOR CALCULATING DISTANCES BETWEEN NODES-----------------------
 
 const manhattanDistance = (firstNode, secondNode) => {
   const firstNodeCoordinates = firstNode.id

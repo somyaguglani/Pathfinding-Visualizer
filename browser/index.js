@@ -151,10 +151,6 @@ Board.prototype.changeSpecialNode = function (
   currentNodeElement
 ) {}; //do
 
-// ---------------FUNCTION FOR REDOING THE ALGORITHM WHEN START AND TARGET ARE MOVED---------------
-
-Board.prototype.redoAlgo = function () {}; //do
-
 // --------------FUNCTION FOR DEALING WITH WALLS AND WEIGHTS------------
 
 Board.prototype.changeNormalNode = function (currNode, currNodeElement) {
@@ -186,99 +182,94 @@ Board.prototype.getNode = function (id) {
   return this.allNodesArray[i][j];
 };
 
-//-----------------FUNCTION FOR GETTING SHORTEST PATH IN ARRAY -----------------
+// -----------------------FUNCTIONS FOR CLEARING WALLS AND WEIGHTS AND SETTING THE BOARD TO IT'S INITIAL STATE---------------
 
-Board.prototype.addShortestPath = function (type) {
-  let currentNode;
-  currentNode = this.getNode(this.getNode(this.target).previousNode);
-  while (currentNode.id !== this.start) {
-    this.shortestPathNodesToAnimate.unshift(currentNode);
-    if (type === `draw`) {
-      document.getElementById(currentNode.id).className = `shortest-path`;
+// -----------FUNCTION FOR CLEARING WALLS AND WEIGHTS -------------------
+
+Board.prototype.clearWallsAndWeights = function () {
+  this.clearPath();
+  for (let row = 0; row < this.height; row++) {
+    for (let col = 0; col < this.width; col++) {
+      const currentNode = this.allNodesArray[row][col];
+      if (currentNode.status === `wall` || currentNode.weight === 15) {
+        currentNodeElement = document.getElementById(`${row}-${col}`);
+        currNodeElement.className = `unvisited`;
+        currentNode.status = `unvisited`;
+        currentNode.weight = 0;
+      }
     }
-    currentNode = this.getNode(currentNode.previousNode.id);
   }
 };
 
-//draw means class added,  add means not for type
+// ----------------FUNCTION FOR CLEARING WEIGHTS--------------------
 
-//---------------------FUNCTION FOR DRAWING SHORTEST PATH---------------------
-
-Board.prototype.drawShortestPathTimeout = function (type) {
-  let currentNode;
-  let secondCurrentNode;
-  let currentNodesToAnimate = [];
-  currentNode = this.getNode(this.getNode(this.target).previousNode);
-  while (currentNode.id !== this.start) {
-    currentNodesToAnimate.unshift(currentNode);
-    currentNode = this.getNode(currentNode.previousNode.id);
-  }
-
-  timeout(0);
-
-  function timeout(currentIndex) {
-    if (!currentNodesToAnimate.length)
-      currentNodesToAnimate.push(this.getNode(this.start));
-    setTimeout(function () {
-      if (currentIndex === 0) {
-        shortestPathChange(currentNodesToAnimate[currentIndex]);
-      } else if (currentIndex < currentNodesToAnimate.length) {
-        shortestPathChange(
-          currentNodesToAnimate[currentIndex],
-          currentNodesToAnimate[currentIndex - 1]
-        );
-      } else if (currentIndex === currentNodesToAnimate.length) {
-        shortestPathChange(
-          this.nodes[this.target],
-          currentNodesToAnimate[currentIndex - 1],
-          `target`
-        );
+Board.prototype.clearWeights = function () {
+  for (let row = 0; row < this.height; row++) {
+    for (let col = 0; col < this.width; col++) {
+      const currentNode = this.allNodesArray[row][col];
+      if (currentNode.weight === 15) {
+        currentNodeElement = document.getElementById(`${row}-${col}`);
+        currNodeElement.className = `unvisited`;
+        currentNode.status = `unvisited`;
+        currentNode.weight = 0;
       }
-      if (currentIndex > currentNodesToAnimate.length) {
-        board.toggleButtons();
-        return;
-      }
-      timeout(currentIndex + 1);
-    }, 40);
-  }
-
-  function shortestPathChange(currentNode, previousNode, istarget) {
-    if (currentNode.id !== this.start) {
-      if (
-        currentNode.id !== board.target ||
-        (currentNode.id === board.target && istarget)
-      ) {
-        let currentNodeElement = document.getElementById(currentNode.id);
-        if (type === `unweighted`) {
-          currentNodeElement.className = `shortest-path-unweighted`;
-        } else {
-          let direction = `direction`;
-          if (currentNode[direction] === `up`) {
-            currentNodeElement.className = `shortest-path-up`;
-          } else if (currentNode[direction] === `down`) {
-            currentNodeElement.className = `shortest-path-down`;
-          } else if (currentNode[direction] === `right`) {
-            currentNodeElement.className = `shortest-path-right`;
-          } else if (currentNode[direction] === `left`) {
-            currentNodeElement.className = `shortest-path-left`;
-          } else {
-            currentNodeElement.className = `shortest-path`;
-          }
-        }
-      }
-    }
-    if (previousNode) {
-      if (previousNode.id !== this.target && previousNode.id !== this.start) {
-        let previousNodeElement = document.getElementById(previousNode.id);
-        previousNodeElement.className =
-          previousNode.weight === 15 ? `shortest-path weight` : `shortest-path`;
-      }
-    } else {
-      let element = document.getElementById(this.start);
-      element.className = `startTransparent`;
     }
   }
 };
+
+// ------------------FUNCTION FOR CLEARING NODE STATUS------------------
+//why not weights?
+Board.prototype.clearStatus = function () {
+  const specialStatus = [`wall`, `start`, `target`];
+  for (let row = 0; row < this.height; row++) {
+    for (let col = 0; col < this.width; col++) {
+      const currentNode = this.getNode(`${row}-${col}`);
+      currentNode.previousNode = null;
+      currentNode.direction = null;
+      currentNode.distance = Infinity;
+      currentNode.totalDistance = Infinity;
+      currentNode.heuristicDistance = null;
+      if (!specialStatus.includes(currentNode.status)) {
+        currentNode.status = `unvisited`;
+      }
+    }
+  }
+};
+
+// -----------------FUNCTION FOR CLEARING PATH------------------------
+
+Board.prototype.clearPath = function () {
+  let startNode = this.getNode(this.start);
+  let targetNode = this.getNode(this.target);
+  startNode.status = `start`;
+  startNodeElement = document.getElementById(this.start);
+  startNodeElement.className = `start`;
+  targetNode.status = `target`;
+  targetNodeElement = document.getElementById(this.target);
+  targetNodeElement.className = `target`;
+  this.algoComplete = false;
+  const specialStatus = [`wall`, `start`, `target`];
+  for (let row = 0; row < this.height; row++) {
+    for (let col = 0; col < this.width; col++) {
+      let currentNode = this.allNodesArray[row][col];
+      let currentNodeElement = document.getElementById(`${row}-${col}`);
+      currentNode.previousNode = null;
+      currentNode.distance = Infinity;
+      currentNode.totalDistance = Infinity;
+      currentNode.heuristicDistance = null;
+      currentNode.direction = null;
+
+      if (currentNode.weight === 15) {
+        currentNode.status = `unvisited`;
+        currentNodeElement.className = `unvisited weight`;
+      } else if (!specialStatus.includes(currentNode.status)) {
+        currentNode.status = `unvisited`;
+        currentNodeElement.className = `unvisited`;
+      }
+    }
+  }
+};
+
 // ---------------FUNCTION FOR PROVIDING TEXT FOR TUTORIAL-------------
 
 let counter = 0;
@@ -646,7 +637,6 @@ window.addEventListener(`keydown`, (e) => {
   }
 });
 //tasks for js
-
 //write launch animations and launch instant animations
 //write clearboard , clear walls and weights , clear path
 //redo algos
