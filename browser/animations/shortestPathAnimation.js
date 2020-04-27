@@ -12,8 +12,6 @@ const addShortestPath = (board, type) => {
   }
 };
 
-//draw means class added,  add means not for type
-
 //---------------------FUNCTION FOR DRAWING SHORTEST PATH---------------------
 
 const drawShortestPathTimeout = (board, type) => {
