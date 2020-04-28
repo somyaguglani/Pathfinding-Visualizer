@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinding Visualizer</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.eda04eed.png">
+    <link rel="stylesheet" href="/main.17911552.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+  <script src="/main.17911552.js"></script></head>
+  <body>
+    <div class="navbarContainer">
+      <ul>
+        <li class="refreshLogo"><a href="#">Pathfinding Visualizer</a></li>
+        <li class="dropDown">
+          <a id="algorithms" class="dropButton" href="#">Algorithms  <span style="font-size: 12px;">&#9660;</span></a>
+
+          <ul class="absolute-pc">
+            <li><a id="astar" class="algoOptions" href="#">A* Search</a></li>
+            <li><a id="dijkstra" class="algoOptions" href="#">Dijkstra's Algorithm</a></li>
+            <li><a id="bestfirst" class="algoOptions" href="#">Greedy Best-first Search </a></li>
+            <li><a id="breadthfirst" class="algoOptions" href="#">Breadth-first Search</a></li>
+            <li><a id="depthfirst" class="algoOptions" href="#">Depth-first Search</a></li>
+          </ul>
+        </li>
+        <li class="dropDown">
+          <a id="mazesandpatterns" href="#">Mazes & Patterns <span style="font-size: 12px;">&#9660;</span></a>
+          <ul class="absolute-pc">
+            <li><a class="maze" id="verticalskew" href="#">Recursive Division(vertical skew)</a></li>
+            <li><a class="maze" id="horizontalskew" href="#">Recursive Division(horizontal skew)</a></li>
+            <li><a class="maze" id="randomwall" href="#">Basic Random Maze</a></li>
+            <li><a class="maze" id="randomweight" href="#">Basic Weight Maze</a></li>
+            <li><a class="maze" id="stair" href="#">Simple Stair Pattern</a></li>
+          </ul>
+        </li>
+        <li>
+          <button class="visualizeButton">Visualize!</button>
+        </li>
+        <li><a class="clearLinks" id="clearBoard" href="#">Clear Board</a></li>
+        <li><a class="clearLinks" id="clearWallsAndWeights" href="#">Clear Walls & Weights</a></li>
+        <li><a class="clearLinks" id="clearPath" href="#">Clear Path</a></li>
+        <li class="dropDown">
+          <a id="speed" href="#">Speed: Fast <span style="font-size: 12px;">&#9660;</span>
+          </a>
+
+          <ul class="absolute-pc">
+            <li><a class="speeds" id="fast" href="#">Fast</a></li>
+            <li><a class="speeds" id="average" href="#">Average</a></li>
+            <li><a class="speeds" id="slow" href="#">Slow</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="gridContainer">
+      <div class="mainContentContainer">
+        <div>
+          <ul>
+            <li>
+              <div id="nodeSymbol" class="start"></div>
+              Start Node
+            </li>
+            <li>
+              <div id="nodeSymbol" class="target"></div>
+              Target Node
+            </li>
+            <li class="cancelable">
+              <div id="nodeSymbol" class="borderlessWeight"></div>
+              Weight Node
+            </li>
+            <li>
+              <div id="nodeSymbol" class="unvisited"></div>
+              Unvisited Node
+            </li>
+            <li>
+              <div id="nodeSymbol" class="visited"></div>
+              Visited Nodes
+            </li>
+            <li>
+              <div id="nodeSymbol" class="shortest-path"></div>
+              Shortest-path Node
+            </li>
+            <li>
+              <div id="nodeSymbol" class="wall"></div>
+              Wall Node
+            </li>
+          </ul>
+        </div>
+        <div class="algoDescription">
+          Pick an algorithm to visualize it !
+        </div>
+      </div>
+      <div class="gridFlex">
+        <table class="grid"></table>
+      </div>
+    </div>
+
+    <div class="tuturialContainerModal">
+      <div class="modalInner">
+        <h1>Welcome to Pathfinding Visualizer!
+        <h2>
+          This short tutorial will walk you through all of the features of this
+          application.
+        
+        <p>
+          If you want to dive right in, feel free to press the "Skip Tutorial"
+          button below. Otherwise, press "Next"!
+        </p>
+        <div class="pageCounter">1/7</div>
+        <p>If you want to see the source code for this application, check out my <a href="https://github.com/somyaguglani/Pathfinding-Visualizer">github </a></p>
+  <img style=" height:150px;" src="/c_icon.5969cb94.png" alt="startingIcon">
+       
+        <div class="tutorialButtons">
+          <button class="skipButton">Skip Tutorial</button>
+          <button class="prevButton">Previous</button>
+          <button class="nextButton">Next</button>
+        </div>
+      </h2></h1></div>
+    </div>
+    <script src="/browser.d51ab39d.js" type="module"></script>
+  </body>
+</html>

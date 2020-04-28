@@ -282,7 +282,7 @@ strong {
 .instantvisited.weight {
   border: 1px solid rgb(175, 216, 248);
   background-color: rgba(0, 190, 218, 0.75);
-  background-image: url("./imagesAndSvg/weight.svg");
+  background-image: url("../styling/imagesAndSvg/weight.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -324,7 +324,7 @@ strong {
 }
 
 .target {
-  background-image: url("./imagesAndSvg/circle.svg");
+  background-image: url("../styling/imagesAndSvg/circle.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -356,7 +356,7 @@ strong {
 
 .visited.weight {
   border: 1px solid rgb(175, 216, 248);
-  background-image: url("./imagesAndSvg/weight.svg");
+  background-image: url("../styling/imagesAndSvg/weight.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -413,7 +413,7 @@ strong {
 }
 
 .unvisited.weight {
-  background-image: url("./imagesAndSvg/weight.svg");
+  background-image: url("../styling/imagesAndSvg/weight.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -428,7 +428,7 @@ strong {
 }
 
 .borderlessWeight {
-  background-image: url("./imagesAndSvg/weight.svg");
+  background-image: url("../styling/imagesAndSvg/weight.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -455,7 +455,7 @@ strong {
 }
 
 .shortest-path-unweighted {
-  background: url("./imagesAndSvg/spaceshiptwo-up.svg");
+  background: url("../styling/imagesAndSvg/spaceshiptwo-up.svg");
   background-color: rgb(255, 254, 106);
   background-position: center;
   background-repeat: no-repeat;
@@ -464,7 +464,7 @@ strong {
 
 .shortest-path.weight {
   background-color: rgb(255, 254, 106);
-  background-image: url("./imagesAndSvg/weight.svg");
+  background-image: url("../styling/imagesAndSvg/weight.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -548,7 +548,7 @@ strong {
 
 .instantshortest-path.weight {
   background-color: rgb(255, 254, 106);
-  background-image: url("./imagesAndSvg/weight.svg");
+  background-image: url("../styling/imagesAndSvg/weight.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

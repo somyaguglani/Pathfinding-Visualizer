@@ -1,0 +1,696 @@
+/* ------------------------UNIVERSAL PROPERTIES-------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+}
+
+button {
+  display: block;
+  padding: 0.6em;
+  background-color: #1abc9c;
+  border: none;
+  border-radius: 0.3em;
+  font-size: 1.1em;
+  font-weight: 400;
+  color: white;
+  outline: none;
+  margin: 0 auto;
+}
+/* ------------------NAVIGATION BAR--------------------- */
+
+.navbarContainer {
+  background: #34495e;
+}
+.refreshLogo {
+  font-size: 1.3em;
+  font-weight: 900;
+}
+
+.navbarContainer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.navbarContainer ul li {
+  width: fit-content;
+}
+.navbarContainer ul li > ul {
+  display: none;
+  flex-direction: column;
+  background-color: #34495e;
+  z-index: 4;
+}
+
+.navbarContainer ul li > ul li {
+  width: 100%;
+}
+.navbarContainer ul li > ul a {
+  color: #e1e4e7;
+  font-weight: normal;
+  margin: 0em 0.5em;
+  font-size: 0.8em;
+}
+
+.navbarContainer ul li.displayDropdown > ul {
+  display: flex;
+  margin: 1em;
+  padding: 0.4em 0em;
+}
+.navbarContainer a {
+  display: block;
+  background: #34495e;
+  color: white;
+  padding: 0.7em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.navbarContainer ul li > a:hover {
+  color: #1abc9c;
+}
+.navbarContainer ul li > ul a:hover {
+  background: #1abc9c;
+  color: white;
+}
+@media screen and (min-width: 601px) {
+  .absolute-pc {
+    padding: 1em;
+    position: absolute;
+  }
+}
+@media (max-width: 600px) {
+  .navbarContainer ul li {
+    width: 100%;
+  }
+  .navbarContainer ul li > ul li {
+    text-align: center;
+    width: fit-content;
+    display: inline-block;
+  }
+}
+.navbarContainer ul li > ul a {
+  border-radius: 0.5em;
+  width: fit-content;
+  padding: 0.5em;
+  font-size: 1em;
+}
+button:hover {
+  background-color: #20cfac;
+}
+.absolute-pc {
+  border-radius: 5px;
+  padding: 1em;
+}
+
+/* ----------------MAIN CONTENT AREA---------------------- */
+
+.algoDescription {
+  text-align: center;
+  margin: 1.2em 0.5em 0.5em 0.5em;
+}
+
+.gridContainer {
+  color: #34495e;
+  font-weight: normal;
+  font-size: 1.2em;
+}
+.gridContainer ul {
+  display: flex;
+  justify-content: space-evenly;
+  list-style-type: disc;
+  list-style: none;
+  flex-wrap: wrap;
+  margin-top: 1em;
+}
+.gridContainer ul li,
+.gridContainer div {
+  font-weight: normal;
+}
+.gridContainer ul li {
+  margin: 0.6em;
+}
+.mainContentContainer div[id="nodeSymbol"] {
+  width: 23px;
+  height: 23px;
+  display: inline-block;
+  position: relative;
+  top: 0.25em;
+  margin: 0 0.42em;
+}
+
+/* ------------------GRID-------------------- */
+
+td {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: white;
+}
+table {
+  table-layout: fixed;
+  width: 1520px;
+  height: 520px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.gridFlex {
+  display: flex;
+  cursor: auto;
+  justify-content: center;
+  margin: 1em 0.7em 0.4em 0.7em;
+}
+
+/* ---------------------MODAL------------------------ */
+
+.tuturialContainerModal {
+  display: block;
+  position: fixed;
+  left: 50%;
+  z-index: 10;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 1);
+  width: 80%;
+  height: 80%;
+  border: 0.15em solid #34495e;
+  grid-auto-rows: min-content;
+  border-radius: 0.2em;
+  text-align: center;
+}
+@media screen and (min-width: 800px) {
+  .tuturialContainerModal {
+    width: 50%;
+  }
+}
+@media (max-width: 600px) {
+  .modalInner {
+    font-size: 0.6em;
+  }
+  .modalInner h1,
+  .modalInner h2,
+  .modalInner p {
+    margin: auto;
+    padding: 0em;
+    font-weight: normal;
+  }
+  .modalInner button {
+    margin: 0.2em;
+  }
+  .modalInner img {
+    max-width: 4em;
+    max-height: 4em;
+    margin: auto;
+  }
+}
+.modalInner {
+  display: grid;
+  color: #34495e;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  overflow: auto;
+}
+.modalInner h1,
+.modalInner h2,
+.modalInner p {
+  margin: auto;
+  padding: 0.2em;
+}
+.modalInner h1 {
+  font-weight: 700;
+}
+.modalInner .pageCounter {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+.modalInner button {
+  display: block;
+  margin: 1em;
+  width: fit-content;
+}
+.modalInner a {
+  text-decoration: none;
+  color: #1abc9c;
+  font-size: 1.2em;
+  margin-left: 0.2em;
+  font-weight: 800;
+}
+.tutorialButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.tutorialButtons button {
+  width: fit-content;
+  height: fit-content;
+}
+
+.modalInner img {
+  max-width: 15em;
+  max-height: 15em;
+  margin: auto;
+}
+strong {
+  font-weight: 800;
+}
+.responsive-img {
+  max-width: 100% !important;
+}
+
+/* ---------DIFFERENT NODES----------- */
+
+.instantvisited {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgba(0, 190, 218, 0.75);
+}
+
+.instantvisited.weight {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgba(0, 190, 218, 0.75);
+  background-image: url("/weight.a31be9a0.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.current {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgb(255, 254, 106);
+}
+
+.start {
+  background-image: url("/triangletwo-right.bdf8a89a.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  animation-name: specialNodes;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-direction: alternate;
+}
+
+.startTransparent {
+  opacity: 0.5;
+  background-image: url("/triangletwo-right.bdf8a89a.svg");
+  background-color: rgb(255, 254, 106);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: specialNodes;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.target {
+  background-image: url("/circle.16888d78.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: specialNodes;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+.unvisited {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: white;
+}
+
+.visited {
+  border: 1px solid rgb(175, 216, 248);
+  animation-name: visitedAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.visited.weight {
+  border: 1px solid rgb(175, 216, 248);
+  background-image: url("/weight.a31be9a0.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: visitedAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.visitedStartNodeBlue {
+  background-image: url("/triangletwo-right.bdf8a89a.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: visitedStartNodeBlueAnimation;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.visitedTargetNodeBlue {
+  background-image: url("/circle.16888d78.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: visitedStartNodeBlueAnimation;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.wall {
+  animation-name: wallAnimation;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  border: none;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.unvisited.weight {
+  background-image: url("/weight.a31be9a0.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: unvisitedWeightAnimation;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.borderlessWeight {
+  background-image: url("/weight.a31be9a0.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: unvisitedWeightAnimation;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.shortest-path {
+  background-color: rgb(255, 254, 106);
+  animation-name: triangletwo;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.shortest-path-unweighted {
+  background: url("/spaceshiptwo-up.71bf55bb.svg");
+  background-color: rgb(255, 254, 106);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.shortest-path.weight {
+  background-color: rgb(255, 254, 106);
+  background-image: url("/weight.a31be9a0.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: triangletwo;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.shortest-path-up {
+  background: url("/triangletwo-up.22ab2434.svg");
+  background-color: rgb(255, 254, 106);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: triangletwo;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.shortest-path-down {
+  background: url("/triangletwo-down.457d986a.svg");
+  background-color: rgb(255, 254, 106);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: triangletwo;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.shortest-path-right {
+  background: url("/triangletwo-right.bdf8a89a.svg");
+  background-color: rgb(255, 254, 106);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: triangletwo;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.shortest-path-left {
+  background: url("/triangletwo-left.800e95ab.svg");
+  background-color: rgb(255, 254, 106);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: triangletwo;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.instantshortest-path {
+  background-color: rgb(255, 254, 106);
+}
+
+.instantshortest-path.weight {
+  background-color: rgb(255, 254, 106);
+  background-image: url("/weight.a31be9a0.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* ---------------ANIMATIONS---------------- */
+
+@keyframes specialNodes {
+  0% {
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes visitedAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(0, 0, 66, 0.75);
+    border-radius: 100%;
+  }
+
+  50% {
+    background-color: rgba(17, 104, 217, 0.75);
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(0, 217, 159, 0.75);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+@keyframes visitedStartNodeBlueAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(0, 0, 66, 0.75);
+    border-radius: 100%;
+  }
+
+  50% {
+    background-color: rgba(17, 104, 217, 0.75);
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(0, 217, 159, 0.75);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+@keyframes wallAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgb(12, 53, 71);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: rgb(12, 53, 71);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(12, 53, 71);
+  }
+}
+
+@keyframes unvisitedWeightAnimation {
+  0% {
+    transform: scale(0.3);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes triangletwo {
+  0% {
+    transform: scale(0.6);
+    background-color: rgb(255, 254, 106);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: rgb(255, 254, 106);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(255, 254, 106);
+  }
+}
+
+/* --------- ACTIVATING AND DEACTIVATING NAVBAR----------- */
+.navbarContainer a[id="algorithms"].activatedLink {
+  background: #34495e;
+  color: rgb(82, 236, 236);
+}
+
+.navbarContainer a[id="speed"].activatedLink {
+  background: #34495e;
+  color: rgb(82, 236, 236);
+}
+
+.navbarContainer a[id="mazesandpatterns"].activatedLink {
+  background: #34495e;
+  color: rgb(82, 236, 236);
+}
+
+.navbarContainer ul li > ul a:hover.activatedLink {
+  background-color: rgb(185, 15, 15);
+}
+
+.visualizeButton.activatedLink {
+  background-color: rgb(185, 15, 15);
+}
+a.clearLinks.activatedLink:hover {
+  color: rgb(185, 15, 15);
+}
+
+.cancelable.cancelNow {
+  color: rgb(185, 15, 15);
+  text-decoration: line-through;
+}
+
+
+/*# sourceMappingURL=/main.17911552.css.map */

@@ -12,7 +12,6 @@ const launchInstantAnimations = (board, success, type) => {
       `instantshortest-path weight`,
     ];
     if (previousNode) {
-      console.log(previousNode.id);
       let previousNodeElement = document.getElementById(previousNode.id);
       if (!specialClasses.includes(previousNodeElement.className)) {
         previousNodeElement.className =
