@@ -374,7 +374,7 @@ Board.prototype.contentInitialize = function () {
         All of the algorithms on this application are adapted for a 2D grid, where 90 degree turns have a "cost" of 1 and movements from a node to another have a "cost" of 1.
         </p>
         <div class="pageCounter">2/7</div>
-        <img src="./styling/imagesAndSvg/path.png" alt="path">
+        <img src="../styling/imagesAndSvg/path.png" alt="path">
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
