@@ -388,7 +388,7 @@ Board.prototype.contentInitialize = function () {
        Note that some algorithms are <strong>unweighted</strong>, while others are <strong>weighted</strong>. Unweighted algorithms do not take turns or weight nodes into account, whereas weighted ones do. Additionally, not all algorithms guarantee the shortest path.
         </p>
         <div class="pageCounter">3/7</div>
-        <img src="../styling/imagesAndSvg/algorithms.png" alt="algoDemo">
+        <img src="./styling/imagesAndSvg/algorithms.png" alt="algoDemo">
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
