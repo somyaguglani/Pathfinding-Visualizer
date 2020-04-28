@@ -2,8 +2,8 @@
 ## PATHFINDING VISUALIZER ##
 
 Welcome to the Pathfinding Visualizer ! I built this application because algorithms fascinate me a lot and by visualizing them
-i could show everyone how they work behind the scenes . So here it is ! i hope you have as much fun as i had building it .
-You can check it here....
+i could show everyone how they work behind the scenes . So here it is ! i hope you have as much fun using it as i had building it .
+You can check it here https://somyaguglani.github.io/Pathfinding-Visualizer/.
 
 ### Features ###
 
