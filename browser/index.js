@@ -398,17 +398,21 @@ Board.prototype.contentInitialize = function () {
         <h2>
        Not all algorithms are created equal.
         </h2>
-        <p>
+        <h2>
      <strong> Dijkstra's Algorithm</strong> (weighted): the father of pathfinding algorithms; guarantees the shortest path
      </br>
+  </br>
  <strong>A* Search  </strong>(weighted): arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm
  </br>
+  </br>
  <strong>Greedy Best-first Search  </strong>(weighted): a faster, more heuristic-heavy version of A*; does not guarantee the shortest path
  </br>
+  </br>
  <strong>Breath-first Search </strong> (unweighted): a great algorithm; guarantees the shortest path
  </br>
+  </br>
  <strong>Depth-first Search </strong> (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path
-        </p>
+        </h2>
         <div class="pageCounter">4/7</div>
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
