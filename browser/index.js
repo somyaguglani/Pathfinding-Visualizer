@@ -398,7 +398,7 @@ Board.prototype.contentInitialize = function () {
         <h2>
        Not all algorithms are created equal.
         </h2>
-        <h2>
+        <h4>
      <strong> Dijkstra's Algorithm</strong> (weighted): the father of pathfinding algorithms; guarantees the shortest path
      </br>
   </br>
@@ -412,7 +412,7 @@ Board.prototype.contentInitialize = function () {
  </br>
   </br>
  <strong>Depth-first Search </strong> (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path
-        </h2>
+        </h4>
         <div class="pageCounter">4/7</div>
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
