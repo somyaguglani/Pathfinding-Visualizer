@@ -358,7 +358,7 @@ Board.prototype.contentInitialize = function () {
         </p>
         <div class="pageCounter">1/7</div>
         <p>If you want to see the source code for this application, check out my <a  href="https://github.com/somyaguglani/Pathfinding-Visualizer" >github </a></p>
-        <img style=" height:150px;" src="../styling/imagesAndSvg/c_icon.png" alt="startingIcon">
+        <img style=" height:150px;" src="styling/imagesAndSvg/c_icon.png" alt="startingIcon">
 
         <div class ="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
@@ -374,7 +374,7 @@ Board.prototype.contentInitialize = function () {
         All of the algorithms on this application are adapted for a 2D grid, where 90 degree turns have a "cost" of 1 and movements from a node to another have a "cost" of 1.
         </p>
         <div class="pageCounter">2/7</div>
-        <img src="../styling/imagesAndSvg/path.png" alt="path">
+        <img src="styling/imagesAndSvg/path.png" alt="path">
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
@@ -388,7 +388,7 @@ Board.prototype.contentInitialize = function () {
        Note that some algorithms are <strong>unweighted</strong>, while others are <strong>weighted</strong>. Unweighted algorithms do not take turns or weight nodes into account, whereas weighted ones do. Additionally, not all algorithms guarantee the shortest path.
         </p>
         <div class="pageCounter">3/7</div>
-        <img src="./styling/imagesAndSvg/algorithms.png" alt="algoDemo">
+        <img src="styling/imagesAndSvg/algorithms.png" alt="algoDemo">
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
@@ -398,7 +398,7 @@ Board.prototype.contentInitialize = function () {
         <h2>
        Not all algorithms are created equal.
         </h2>
-        <h3>
+        <p>
      <strong> Dijkstra's Algorithm</strong> (weighted): the father of pathfinding algorithms; guarantees the shortest path
      </br>
   </br>
@@ -412,7 +412,7 @@ Board.prototype.contentInitialize = function () {
  </br>
   </br>
  <strong>Depth-first Search </strong> (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path
-        </h3>
+        </p>
         <div class="pageCounter">4/7</div>
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
@@ -427,7 +427,7 @@ Board.prototype.contentInitialize = function () {
        Walls are impenetrable, meaning that a path cannot cross through them. Weights, however, are not impassable. They are simply more "costly" to move through. In this application, moving through a weight node has a "cost" of 15.
         </p>
         <div class="pageCounter">5/7</div>
-        <img src="../styling/imagesAndSvg/walls.gif" alt="wallsDemo">
+        <img src="styling/imagesAndSvg/walls.gif" alt="wallsDemo">
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
@@ -441,7 +441,7 @@ Board.prototype.contentInitialize = function () {
       Note that you can drag nodes even after an algorithm has finished running. This will allow you to instantly see different paths.
         </p>
         <div class="pageCounter">6/7</div>
-        <img src="../styling/imagesAndSvg/dragging.gif" alt="draggingDemo">
+        <img src="styling/imagesAndSvg/dragging.gif" alt="draggingDemo">
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
@@ -455,7 +455,7 @@ Board.prototype.contentInitialize = function () {
       You can clear the current path, clear walls and weights, clear the entire board, and adjust the visualization speed, all from the navbar. If you want to access this tutorial again, click on "Pathfinding Visualizer" in the top left corner of your screen.
         </p>
         <div class="pageCounter">7/7</div>
-        <img class = "responsive-img" src="../styling/imagesAndSvg/navbar.png" alt="algoDemo">
+        <img class = "responsive-img" src="styling/imagesAndSvg/navbar.png" alt="algoDemo">
         <h2>Now that you know everything, it's time to play around with the visualizer. Enjoy!</h2>
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
