@@ -11,9 +11,11 @@ The application also allows features such as
 
 * Changing the speed at which the algorithms work .
 
-* Recomputing the path instantly if start or target n* odes are moved .
+* Recomputing the path instantly if start or target nodes are moved .
 
 * Generating Mazes .
+
+* Responsive 
 
 
 ### Meet The Algorithms ###
