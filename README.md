@@ -12,6 +12,8 @@ The application has the following features :
 
 * Visualization of heuristic and non-heuristic algorithms . 
 
+* Addition of walls and weights .
+
 * Changing the speed at which the algorithms work .
 
 * Recomputing the path instantly if start or target nodes are moved .
