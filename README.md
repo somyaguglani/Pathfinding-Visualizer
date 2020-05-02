@@ -7,7 +7,10 @@ You can check it here https://somyaguglani.github.io/Pathfinding-Visualizer/.
 
 ### Features ###
 
-The application also allows features such as 
+The application has the following features : 
+* Visualization of weighted and unweighted algorithms .
+
+* Visualization of heuristic and non-heuristic algorithms . 
 
 * Changing the speed at which the algorithms work .
 
@@ -15,7 +18,8 @@ The application also allows features such as
 
 * Generating Mazes .
 
-* Responsive 
+* Responsive .
+
 
 
 ### Meet The Algorithms ###
