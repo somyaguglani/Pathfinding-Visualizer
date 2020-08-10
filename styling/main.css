@@ -10,7 +10,7 @@
 
 button {
   display: block;
-  padding: 0.6em;
+  padding: 0.54em;
   background-color: #1abc9c;
   border: none;
   border-radius: 0.3em;
@@ -156,11 +156,13 @@ td {
   background-color: white;
 }
 table {
-  table-layout: fixed;
-  width: 1520px;
-  height: 520px;
   border-spacing: 0;
   border-collapse: collapse;
+}
+
+table td {
+  width: 25px;
+  height: 25px;
 }
 .gridFlex {
   display: flex;
@@ -229,6 +231,9 @@ table {
   margin: auto;
   padding: 0.2em;
 }
+.modalInner p {
+  font-size: 1.2em;
+}
 .modalInner h1 {
   font-weight: 700;
 }
@@ -245,7 +250,6 @@ table {
 .modalInner a {
   text-decoration: none;
   color: #1abc9c;
-  font-size: 1.2em;
   margin-left: 0.2em;
   font-weight: 800;
 }

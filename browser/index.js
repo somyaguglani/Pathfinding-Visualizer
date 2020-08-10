@@ -435,7 +435,7 @@ Board.prototype.contentInitialize = function () {
         </div>`);
   this.tutorialContentArray.push(`<h1>Dragging nodes</h1>
         <h2>
-    Click and drag the start, bomb, and target nodes to move them.
+    Click and drag the start and target nodes to move them.
         </h2>
         <p>
       Note that you can drag nodes even after an algorithm has finished running. This will allow you to instantly see different paths.
@@ -449,14 +449,13 @@ Board.prototype.contentInitialize = function () {
         </div>`);
   this.tutorialContentArray.push(`<h1>Visualizing and more</h1>
         <h2>
-       Use the navbar buttons to visualize algorithms and to do other stuff!
+       Use the navbar buttons to visualize algorithms and explore other features!
         </h2>
         <p>
       You can clear the current path, clear walls and weights, clear the entire board, and adjust the visualization speed, all from the navbar. If you want to access this tutorial again, click on "Pathfinding Visualizer" in the top left corner of your screen.
         </p>
         <div class="pageCounter">7/7</div>
         <img class = "responsive-img" src="./styling/imagesAndSvg/navbar.png" alt="algoDemo">
-        <h2>Now that you know everything, it's time to play around with the visualizer. Enjoy!</h2>
         <div class="tutorialButtons">
           <button class="skipButton">Skip Tutorial</button>
           <button class="prevButton">Previous</button>
@@ -760,8 +759,9 @@ Board.prototype.restOfListeners = function () {
 let contentHeight = mainContentContainer.offsetHeight;
 let docHeight = document.documentElement.scrollHeight;
 let docWidth = document.documentElement.scrollWidth;
-let height = Math.floor((docHeight - contentHeight - navHeight) / 24);
-let width = Math.floor(docWidth / 23);
+if (docWidth < 600) docHeight = docHeight + 500;
+let height = Math.floor((docHeight - contentHeight - navHeight) / 27);
+let width = Math.floor(docWidth / 25);
 let board = new Board(width, height);
 board.initialize();
 
